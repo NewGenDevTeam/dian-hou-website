@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "tag_en": "House Made",
+      "tag_zh": "自家製作",
+      "name_en": "Prawn Paste",
+      "name_zh": "手打鮮蝦滑",
+      "desc_en": "Tiger prawns hand-pounded each morning. Drop it in, watch it plump into a silken cloud.",
+      "desc_zh": "每天早晨手打鮮虎蝦。輕輕放入鍋中，看著它膨脹成絲滑的雲朵。",
+      "price": "RM 26",
+      "spice": 0
+    },
+    {
+      "tag_en": "From the Forest",
+      "tag_zh": "山林珍品",
+      "name_en": "Mushroom Medley",
+      "name_zh": "菌菇拼盤",
+      "desc_en": "Enoki, king oyster, shiitake, matsutake — turns your broth into something mystical.",
+      "desc_zh": "金針菇、杏鮑菇、香菇、松茸——讓你的湯底升華成仙境。",
+      "price": "RM 32",
+      "spice": 0
+    },
+    {
+      "tag_en": "Garden Fresh",
+      "tag_zh": "園圃新鮮",
+      "name_en": "Seasonal Greens",
+      "name_zh": "時令蔬菜拼盤",
+      "desc_en": "The day's best greens — chosen by our kitchen each morning, never the day before.",
+      "desc_zh": "每天早晨精選當日最佳時蔬，絕不使用隔日食材。",
+      "price": "RM 18",
+      "spice": 0
+    }
+  ]
+}

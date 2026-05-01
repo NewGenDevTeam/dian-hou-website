@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點火心窩 · Dian Huo Hotpot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+    /* ── Hero ── */
+    #hero {
+        position: relative; height: 100vh; min-height: 700px;
+        display: flex; flex-direction: column;
+        align-items: flex-start; justify-content: center;
+        overflow: hidden; background: var(--bg);
+    }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+    /* Red ember glow at bottom center */
+    .hero-glow {
+        position: absolute; bottom: -120px; left: 50%; transform: translateX(-50%);
+        width: 900px; height: 500px; z-index: 2; pointer-events: none;
+        background: radial-gradient(ellipse, rgba(228,30,43,.18) 0%, rgba(160,21,32,.06) 50%, transparent 75%);
+        animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    /* Chinese background watermark */
+    .hero-bg-zh {
+        position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+        font-family: 'Noto Serif SC', serif; font-weight: 600;
+        font-size: clamp(220px, 38vw, 520px); line-height: 1;
+        color: transparent; -webkit-text-stroke: 1px rgba(228,30,43,.055);
+        user-select: none; pointer-events: none; z-index: 2;
+        writing-mode: vertical-rl; letter-spacing: -0.05em;
+    }
+
+    /* Circle glow (simulated hotpot bowl) */
+    .hero-bowl {
+        position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+        width: clamp(280px, 38vw, 520px); height: clamp(280px, 38vw, 520px);
+        border-radius: 50%; z-index: 3; pointer-events: none;
+        background: #0c0402;
+        box-shadow:
+            0 0 80px rgba(228,30,43,.18),
+            0 0 160px rgba(180,20,30,.08),
+            inset 0 0 60px rgba(228,30,43,.1);
+        animation: bowlGlow 4s ease-in-out infinite;
+    }
+    /* Decorative ring around bowl */
+    .hero-bowl::before {
+        content: '';
+        position: absolute; inset: -12px;
+        border-radius: 50%;
+        border: 1px solid rgba(228,30,43,.22);
+        box-shadow: 0 0 20px rgba(228,30,43,.12);
+    }
+    .hero-bowl::after {
+        content: '';
+        position: absolute; inset: -28px;
+        border-radius: 50%;
+        border: 1px solid rgba(228,30,43,.08);
+    }
+    @keyframes bowlGlow {
+        0%,100% { box-shadow: 0 0 80px rgba(228,30,43,.18), 0 0 160px rgba(180,20,30,.08), inset 0 0 60px rgba(228,30,43,.1); }
+        50% { box-shadow: 0 0 120px rgba(228,30,43,.28), 0 0 240px rgba(180,20,30,.14), inset 0 0 80px rgba(228,30,43,.16); }
+    }
+
+    /* Logo inside the bowl — circular photo crop */
+    .hero-bowl-inner {
+        position: absolute; inset: 0;
+        border-radius: 50%; overflow: hidden;
+    }
+    .hero-bowl-inner::after {
+        content: '';
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle at center,
+            transparent 28%,
+            rgba(10,3,1,.45) 62%,
+            rgba(10,3,1,.78) 85%,
+            rgba(10,3,1,.92) 100%);
+        pointer-events: none; z-index: 2;
+    }
+    .hero-bowl-logo {
+        display: block; width: 100%; height: 90%;
+        object-fit: cover; object-position: center 70%;
+        filter: saturate(1.15) brightness(0.78) contrast(1.08);
+        animation: logoPulse 7s ease-in-out infinite;
+        transform-origin: center;
+    }
+    @keyframes logoPulse {
+        0%,100% { filter: saturate(1.1) brightness(0.76) contrast(1.06); transform: scale(1.0); }
+        50%      { filter: saturate(1.25) brightness(0.86) contrast(1.10); transform: scale(1.06); }
+    }
+
+    /* Hero text content */
+    .hero-content {
+        position: relative; z-index: 5;
+        padding-left: 60px; padding-right: 50%;
+    }
+    .hero-eyebrow {
+        font-family: 'Outfit', sans-serif;
+        font-size: 11px; letter-spacing: .38em; text-transform: uppercase;
+        color: var(--red); margin-bottom: 22px;
+        opacity: 0; transform: translateY(16px);
+        transition: opacity .7s .2s, transform .7s .2s;
+    }
+    .hero-eyebrow.vis { opacity: 1; transform: translateY(0); }
+
+    .hero-line {
+        font-family: 'Big Shoulders Display', 'Impact', sans-serif;
+        font-weight: 900; text-transform: uppercase;
+        color: var(--white); line-height: 0.88;
+        letter-spacing: -0.02em;
+        font-size: clamp(72px, 12vw, 172px);
+        display: block;
+        opacity: 0; transform: translateY(40px);
+        transition: opacity .7s, transform .7s;
+    }
+    .hero-line.l1 { transition-delay: .3s; }
+    .hero-line.l2 { transition-delay: .46s; color: var(--red); }
+    .hero-line.vis { opacity: 1; transform: translateY(0); }
+
+    .hero-zh {
+        font-family: 'Noto Serif SC', serif; font-weight: 300;
+        font-size: clamp(13px, 1.5vw, 18px); letter-spacing: .22em;
+        color: rgba(247,238,233,.4); margin-top: 24px; margin-bottom: 8px;
+        opacity: 0; transform: translateY(14px);
+        transition: opacity .7s .62s, transform .7s .62s;
+    }
+    .hero-zh.vis { opacity: 1; transform: translateY(0); }
+
+    .hero-sub {
+        font-family: 'Outfit', sans-serif; font-size: 15px;
+        color: rgba(247,238,233,.55); line-height: 1.65;
+        max-width: 360px; margin-bottom: 40px;
+        opacity: 0; transform: translateY(12px);
+        transition: opacity .7s .72s, transform .7s .72s;
+    }
+    .hero-sub.vis { opacity: 1; transform: translateY(0); }
+
+    .hero-cta {
+        display: flex; gap: 14px; flex-wrap: wrap;
+        opacity: 0; transform: translateY(12px);
+        transition: opacity .7s .86s, transform .7s .86s;
+    }
+    .hero-cta.vis { opacity: 1; transform: translateY(0); }
+
+    /* Scroll indicator */
+    .scroll-ind {
+        position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+        z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        opacity: 0; animation: fadeInAnim 1s 1.6s forwards;
+    }
+    .scroll-ind span { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: rgba(247,238,233,.3); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(228,30,43,.5), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity:.4; } 50% { opacity:1; } }
+    @keyframes fadeInAnim { to { opacity: 1; } }
+    @keyframes glowPulse { 0%,100% { opacity:.8; } 50% { opacity:1; } }
+
+    /* ── Quick-link strip ── */
+    .hero-strip {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        display: grid; grid-template-columns: repeat(4,1fr);
+        z-index: 6;
+    }
+    .strip-item {
+        padding: 20px 16px; text-align: center;
+        background: rgba(12,6,4,.7); backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(228,30,43,.14);
+        border-right: 1px solid rgba(228,30,43,.08);
+        text-decoration: none;
+        transition: background .3s;
+        display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-item:hover { background: rgba(228,30,43,.12); }
+    .strip-zh { font-family: 'Noto Serif SC', serif; font-size: 12px; color: rgba(228,30,43,.75); }
+    .strip-en { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: rgba(247,238,233,.3); }
+
+    /* ── Skyline ── */
+    .hero-skyline { position: absolute; bottom: 70px; left: 0; right: 0; height: 160px; z-index: 4; pointer-events: none; }
+
+    @media (max-width: 900px) {
+        .hero-content { padding-left: 24px; padding-right: 24px; }
+        .hero-bowl { display: none; }
+        .hero-bg-zh { display: none; }
+        .hero-strip { grid-template-columns: repeat(3,1fr) !important; }
+    }
+
+    </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-left">
+        <a href="about.html" class="nav-pill outline" data-i18n="nav-story">Story</a>
+        <a href="menu.html" class="nav-pill outline" data-i18n="nav-menu">Menu</a>
+    </div>
+    <a href="index.html" class="nav-center">
+        <img src="logo/dian huo logo.jpg" alt="Dian Huo Hotpot">
+        <div class="nav-brand">點火心窩 <span>Dian Huo Hotpot</span></div>
+    </a>
+    <div class="nav-right">
+        <a href="gallery.html" class="nav-pill outline" data-i18n="nav-gallery">Gallery</a>
+        <a href="experience.html" class="nav-pill outline" data-i18n="nav-experience">Experience</a>
+        <a href="reserve.html" class="nav-pill" data-i18n="nav-reserve">Reserve</a>
+        <button class="lang-toggle" id="langToggle">中文</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-glow"></div>
+    <div class="hero-bg-zh">火</div>
+
+    <!-- Simulated hotpot bowl -->
+    <div class="hero-bowl">
+        <div class="hero-bowl-inner">
+            <img src="logo/DSC02472.jpg" alt="" class="hero-bowl-logo">
+        </div>
+    </div>
+
+    <div class="hero-content">
+        <p class="hero-eyebrow" id="hEye" data-i18n="hero-eyebrow">Rooftop · Hotpot · Level 3</p>
+        <span class="hero-line l1" id="hL1" data-i18n="hero-l1">露天</span>
+        <span class="hero-line l2" id="hL2" data-i18n="hero-l2">打边炉</span>
+        <p class="hero-zh" id="hZh" data-i18n="hero-zh-tag">點火心窩 · 城市之巔</p>
+        <p class="hero-sub" id="hSub" data-i18n="hero-sub">A rooftop hotpot experience above the city skyline. Fire, flavour, and the open night sky.</p>
+        <div class="hero-cta" id="hCta">
+            <a href="reserve.html" class="btn-primary"><span data-i18n="hero-btn-reserve">Reserve a Table</span></a>
+            <a href="menu.html" class="btn-outline" data-i18n="hero-btn-menu">View Menu</a>
+        </div>
+    </div>
+
+    <!-- City skyline -->
+    <svg class="hero-skyline" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0C0604" stop-opacity="0"/>
+                <stop offset="60%" stop-color="#0C0604" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0C0604" stop-opacity="1"/>
+            </linearGradient>
+        </defs>
+        <path fill="#0C0604" d="M0,160 L0,138 L28,138 L28,122 L46,122 L46,108 L60,108 L60,92 L74,92 L74,76 L84,76 L84,64 L94,64 L94,76 L108,76 L108,60 L118,50 L128,50 L138,60 L148,60 L148,76 L162,76 L162,92 L180,92 L180,72 L194,72 L194,56 L206,46 L218,36 L230,46 L242,56 L242,72 L256,72 L256,88 L274,88 L274,68 L288,68 L288,52 L300,40 L314,52 L314,68 L330,68 L330,88 L348,88 L348,68 L362,68 L362,50 L374,38 L386,28 L398,38 L410,50 L410,68 L426,68 L426,88 L444,88 L444,66 L458,66 L458,48 L470,36 L484,48 L484,66 L500,66 L500,88 L518,88 L518,66 L532,66 L532,48 L545,36 L558,26 L572,36 L585,48 L585,66 L602,66 L602,88 L620,88 L620,68 L634,68 L634,52 L647,40 L660,52 L660,68 L676,68 L676,88 L694,88 L694,68 L708,68 L708,50 L720,38 L734,50 L734,68 L750,68 L750,88 L768,88 L768,66 L782,66 L782,48 L795,36 L808,48 L808,66 L824,66 L824,88 L842,88 L842,68 L856,68 L856,50 L870,38 L883,28 L897,38 L910,50 L910,68 L926,68 L926,88 L944,88 L944,68 L958,68 L958,50 L971,38 L985,50 L985,68 L1001,68 L1001,88 L1019,88 L1019,64 L1033,64 L1033,48 L1046,36 L1060,48 L1060,64 L1076,64 L1076,82 L1094,82 L1094,66 L1108,66 L1108,50 L1121,38 L1135,50 L1135,66 L1151,66 L1151,82 L1169,82 L1169,88 L1187,88 L1187,70 L1201,70 L1201,54 L1215,42 L1229,54 L1229,70 L1245,70 L1245,88 L1263,88 L1263,76 L1277,76 L1277,62 L1290,52 L1304,62 L1304,76 L1320,76 L1320,90 L1338,90 L1338,106 L1356,106 L1356,120 L1380,120 L1380,134 L1410,134 L1440,134 L1440,160 Z"/>
+        <rect x="120" y="52" width="3" height="3" fill="rgba(228,30,43,.3)"/>
+        <rect x="388" y="30" width="2" height="2" fill="rgba(228,30,43,.25)"/>
+        <rect x="559" y="28" width="3" height="3" fill="rgba(228,30,43,.35)"/>
+        <rect x="884" y="30" width="2" height="2" fill="rgba(228,30,43,.25)"/>
+        <rect x="1047" y="38" width="2" height="2" fill="rgba(228,30,43,.2)"/>
+        <rect x="1122" y="40" width="2" height="2" fill="rgba(228,30,43,.22)"/>
+        <rect x="300" y="42" width="2" height="2" fill="rgba(228,30,43,.18)"/>
+        <rect x="722" y="40" width="2" height="2" fill="rgba(228,30,43,.2)"/>
+        <rect x="0" y="0" width="1440" height="160" fill="url(#sg)"/>
+    </svg>
+
+    <!-- Quick-link strip -->
+    <div class="hero-strip" style="grid-template-columns: repeat(5,1fr);">
+        <a href="about.html" class="strip-item">
+            <span class="strip-zh zh-only">關於我們</span>
+            <span class="strip-en" data-i18n="strip-story">Our Story</span>
+        </a>
+        <a href="menu.html" class="strip-item">
+            <span class="strip-zh zh-only">菜　　單</span>
+            <span class="strip-en" data-i18n="strip-menu">Menu</span>
+        </a>
+        <a href="gallery.html" class="strip-item">
+            <span class="strip-zh zh-only">相　　冊</span>
+            <span class="strip-en" data-i18n="strip-gallery">Gallery</span>
+        </a>
+        <a href="experience.html" class="strip-item">
+            <span class="strip-zh zh-only">空間體驗</span>
+            <span class="strip-en" data-i18n="strip-exp">Experience</span>
+        </a>
+        <a href="reserve.html" class="strip-item">
+            <span class="strip-zh zh-only">訂　　座</span>
+            <span class="strip-en" data-i18n="strip-res">Reservations</span>
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="logo/dian huo logo.jpg" alt="Dian Huo Hotpot">
+                <div><div class="footer-brand">點火心窩 <span>Dian Huo Hotpot</span></div></div>
+            </div>
+            <div class="footer-info">
+                <div data-i18n="footer-addr">Level 3, Jalan SS 24/9, PJ</div>
+                <div><a href="https://wa.link/3f0hjs">+60 17 878 7652</a></div>
+                <div><a href="mailto:urgo.adm@gmail.com">urgo.adm@gmail.com</a></div>
+            </div>
+        </div>
+        <div class="footer-copy" data-i18n="footer-copy">© 2024 點火心窩 Dian Huo Hotpot · All rights reserved</div>
+    </div>
+</footer>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function(user) {
+        if (!user) {
+            window.netlifyIdentity.on('login', function() {
+                document.location.href = '/admin/';
+            });
+        }
+    });
+}
+</script>
+<script src="js/lang.js" defer></script>
+<script src="js/main.js" defer></script>
+<script>
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        ['hEye','hL1','hL2','hZh','hSub','hCta'].forEach(id => document.getElementById(id).classList.add('vis'));
+    }, 150);
+});
+
+// Ember canvas — red-tinted particles
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+class Ember {
+    constructor(){ this.reset(true); }
+    reset(init){
+        this.x = Math.random() * canvas.width;
+        this.y = init ? Math.random() * canvas.height : canvas.height + 10;
+        this.r = Math.random() * 1.8 + 0.5;
+        this.vy = -(Math.random() * 1.2 + 0.35);
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.life = 0;
+        this.maxLife = Math.random() * 200 + 90;
+        // Hue 0-20 = red to orange
+        this.hue = Math.random() * 22;
+    }
+    tick(){
+        this.x += this.vx + Math.sin(this.life * 0.04) * 0.25;
+        this.y += this.vy; this.life++;
+        if(this.life > this.maxLife) this.reset(false);
+    }
+    draw(){
+        const p = this.life / this.maxLife;
+        const a = p < 0.2 ? p/0.2 : 1-(p-0.2)/0.8;
+        const s = this.r * (1 - p * 0.4);
+        ctx.save(); ctx.globalAlpha = a * 0.6;
+        const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,s*2.4);
+        g.addColorStop(0, `hsla(${this.hue+10},100%,80%,1)`);
+        g.addColorStop(0.5, `hsla(${this.hue},95%,55%,.8)`);
+        g.addColorStop(1, `hsla(${this.hue},90%,35%,0)`);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(this.x,this.y,s*2.4,0,Math.PI*2); ctx.fill();
+        ctx.restore();
+    }
+}
+const embers = Array.from({length:70}, () => new Ember());
+(function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); embers.forEach(e=>{e.tick();e.draw();}); requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>

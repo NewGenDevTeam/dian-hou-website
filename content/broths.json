@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "tag_en": "House Signature",
+      "tag_zh": "招牌必點",
+      "name_en": "Fresh Coconut Herbal Chicken",
+      "name_zh": "招牌椰子鸡药材汤",
+      "desc_en": "A refreshing and nourishing soup base slow-simmered with coconut water, herbs, and tender chicken. Naturally sweet, aromatic, and comforting in every sip.",
+      "desc_zh": "以椰子水融合藥材慢熬，湯底清甜回甘，帶有淡淡藥材香氣。搭配鮮嫩雞肉，入口溫潤滋補，清爽不膩，是適合一家大小共享的養生湯底。",
+      "price": "RM 38",
+      "spice": 0
+    },
+    {
+      "tag_en": "Classic Broth",
+      "tag_zh": "經典湯底",
+      "name_en": "Herbal Clarity",
+      "name_zh": "清湯藥材",
+      "desc_en": "Eight premium herbs in slow-cooked pork bone stock. Gentle, restorative, and deeply nourishing.",
+      "desc_zh": "八種上等藥材，慢熬豬骨湯。清淡滋補，養身暖心。",
+      "price": "RM 22",
+      "spice": 0
+    },
+    {
+      "tag_en": "Mild Broth",
+      "tag_zh": "溫和湯底",
+      "name_en": "Tomato & Milk",
+      "name_zh": "番茄奶白",
+      "desc_en": "Sun-ripened tomatoes melted into a creamy, sweet broth. Beloved by those who want comfort over fire.",
+      "desc_zh": "熟透番茄融入奶白湯底，香甜濃郁。不嗜辣者的首選。",
+      "price": "RM 24",
+      "spice": 1
+    }
+  ]
+}

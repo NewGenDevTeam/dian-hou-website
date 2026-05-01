@@ -1,0 +1,107 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# New photos uploaded via CMS go into the gallery/ folder
+media_folder: "gallery"
+public_folder: "/gallery"
+
+# Uncomment and set your Netlify URL after deploying:
+# display_url: https://your-site.netlify.app
+
+collections:
+
+  # ── Gallery ────────────────────────────────────────────────
+  - name: "gallery"
+    label: "Gallery Photos"
+    files:
+      - label: "Gallery Images"
+        name: "gallery_images"
+        file: "content/gallery.json"
+        fields:
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            add_to_top: true
+            fields:
+              - {label: "Photo", name: "src", widget: "image"}
+              - {label: "Caption / Alt text", name: "alt", widget: "string", default: "Dian Huo Hotpot", required: false}
+
+  # ── Menu ───────────────────────────────────────────────────
+  - name: "menu"
+    label: "Menu"
+    files:
+
+      - label: "Soup Bases (Broths)"
+        name: "broths"
+        file: "content/broths.json"
+        fields:
+          - label: "Broth Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Tag (English)", name: "tag_en", widget: "string"}
+              - {label: "Tag (Chinese)", name: "tag_zh", widget: "string"}
+              - {label: "Name (English)", name: "name_en", widget: "string"}
+              - {label: "Name (Chinese)", name: "name_zh", widget: "string"}
+              - {label: "Description (English)", name: "desc_en", widget: "text"}
+              - {label: "Description (Chinese)", name: "desc_zh", widget: "text"}
+              - {label: "Price (e.g. RM 38)", name: "price", widget: "string"}
+              - {label: "Spice Level (0 = none, 3 = hot)", name: "spice", widget: "number", value_type: "int", min: 0, max: 3, default: 0}
+
+      - label: "Premium Cuts"
+        name: "proteins"
+        file: "content/proteins.json"
+        fields:
+          - label: "Protein Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Tag (English)", name: "tag_en", widget: "string"}
+              - {label: "Tag (Chinese)", name: "tag_zh", widget: "string"}
+              - {label: "Name (English)", name: "name_en", widget: "string"}
+              - {label: "Name (Chinese)", name: "name_zh", widget: "string"}
+              - {label: "Description (English)", name: "desc_en", widget: "text"}
+              - {label: "Description (Chinese)", name: "desc_zh", widget: "text"}
+              - {label: "Price (e.g. RM 68)", name: "price", widget: "string"}
+              - {label: "Wide / Featured card", name: "wide", widget: "boolean", default: false}
+              - {label: "Quote (English)", name: "quote_en", widget: "string", required: false}
+              - {label: "Quote (Chinese)", name: "quote_zh", widget: "string", required: false}
+
+      - label: "House Specials"
+        name: "specials"
+        file: "content/specials.json"
+        fields:
+          - label: "Special Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Tag (English)", name: "tag_en", widget: "string"}
+              - {label: "Tag (Chinese)", name: "tag_zh", widget: "string"}
+              - {label: "Name (English)", name: "name_en", widget: "string"}
+              - {label: "Name (Chinese)", name: "name_zh", widget: "string"}
+              - {label: "Description (English)", name: "desc_en", widget: "text"}
+              - {label: "Description (Chinese)", name: "desc_zh", widget: "text"}
+              - {label: "Price (e.g. RM 26)", name: "price", widget: "string"}
+
+  # ── Contact & Info ─────────────────────────────────────────
+  - name: "contact"
+    label: "Contact & Info"
+    files:
+      - label: "Contact Information"
+        name: "contact_info"
+        file: "content/contact.json"
+        fields:
+          - {label: "Address (English)", name: "address_en", widget: "string"}
+          - {label: "Address (Chinese)", name: "address_zh", widget: "string"}
+          - {label: "Phone Number", name: "phone", widget: "string"}
+          - {label: "WhatsApp Link", name: "whatsapp", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Opening Hours (English)", name: "hours_en", widget: "text"}
+          - {label: "Opening Hours (Chinese)", name: "hours_zh", widget: "text"}
+          - {label: "Location Detail (English)", name: "location_en", widget: "text"}
+          - {label: "Location Detail (Chinese)", name: "location_zh", widget: "text"}
+          - {label: "Private Events Note (English)", name: "private_en", widget: "text"}
+          - {label: "Private Events Note (Chinese)", name: "private_zh", widget: "text"}
+          - {label: "Walk-in Note (English)", name: "walkin_en", widget: "text"}
+          - {label: "Walk-in Note (Chinese)", name: "walkin_zh", widget: "text"}
