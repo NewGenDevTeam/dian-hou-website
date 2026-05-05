@@ -18,15 +18,12 @@
     }
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
 
-    /* Red ember glow at bottom center */
     .hero-glow {
         position: absolute; bottom: -120px; left: 50%; transform: translateX(-50%);
         width: 900px; height: 500px; z-index: 2; pointer-events: none;
         background: radial-gradient(ellipse, rgba(228,30,43,.18) 0%, rgba(160,21,32,.06) 50%, transparent 75%);
         animation: glowPulse 3s ease-in-out infinite;
     }
-
-    /* Chinese background watermark */
     .hero-bg-zh {
         position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
         font-family: 'Noto Serif SC', serif; font-weight: 600;
@@ -35,120 +32,76 @@
         user-select: none; pointer-events: none; z-index: 2;
         writing-mode: vertical-rl; letter-spacing: -0.05em;
     }
-
-    /* Circle glow (simulated hotpot bowl) */
     .hero-bowl {
         position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
         width: clamp(280px, 38vw, 520px); height: clamp(280px, 38vw, 520px);
         border-radius: 50%; z-index: 3; pointer-events: none;
         background: #0c0402;
-        box-shadow:
-            0 0 80px rgba(228,30,43,.18),
-            0 0 160px rgba(180,20,30,.08),
-            inset 0 0 60px rgba(228,30,43,.1);
+        box-shadow: 0 0 80px rgba(228,30,43,.18), 0 0 160px rgba(180,20,30,.08), inset 0 0 60px rgba(228,30,43,.1);
         animation: bowlGlow 4s ease-in-out infinite;
     }
-    /* Decorative ring around bowl */
     .hero-bowl::before {
-        content: '';
-        position: absolute; inset: -12px;
-        border-radius: 50%;
-        border: 1px solid rgba(228,30,43,.22);
-        box-shadow: 0 0 20px rgba(228,30,43,.12);
+        content: ''; position: absolute; inset: -12px; border-radius: 50%;
+        border: 1px solid rgba(228,30,43,.22); box-shadow: 0 0 20px rgba(228,30,43,.12);
     }
     .hero-bowl::after {
-        content: '';
-        position: absolute; inset: -28px;
-        border-radius: 50%;
+        content: ''; position: absolute; inset: -28px; border-radius: 50%;
         border: 1px solid rgba(228,30,43,.08);
     }
     @keyframes bowlGlow {
         0%,100% { box-shadow: 0 0 80px rgba(228,30,43,.18), 0 0 160px rgba(180,20,30,.08), inset 0 0 60px rgba(228,30,43,.1); }
         50% { box-shadow: 0 0 120px rgba(228,30,43,.28), 0 0 240px rgba(180,20,30,.14), inset 0 0 80px rgba(228,30,43,.16); }
     }
-
-    /* Logo inside the bowl — circular photo crop */
-    .hero-bowl-inner {
-        position: absolute; inset: 0;
-        border-radius: 50%; overflow: hidden;
-    }
+    .hero-bowl-inner { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; }
     .hero-bowl-inner::after {
-        content: '';
-        position: absolute; inset: 0;
-        border-radius: 50%;
-        background: radial-gradient(circle at center,
-            transparent 28%,
-            rgba(10,3,1,.45) 62%,
-            rgba(10,3,1,.78) 85%,
-            rgba(10,3,1,.92) 100%);
+        content: ''; position: absolute; inset: 0; border-radius: 50%;
+        background: radial-gradient(circle at center, transparent 28%, rgba(10,3,1,.45) 62%, rgba(10,3,1,.78) 85%, rgba(10,3,1,.92) 100%);
         pointer-events: none; z-index: 2;
     }
     .hero-bowl-logo {
         display: block; width: 100%; height: 90%;
         object-fit: cover; object-position: center 70%;
         filter: saturate(1.15) brightness(0.78) contrast(1.08);
-        animation: logoPulse 7s ease-in-out infinite;
-        transform-origin: center;
+        animation: logoPulse 7s ease-in-out infinite; transform-origin: center;
     }
     @keyframes logoPulse {
         0%,100% { filter: saturate(1.1) brightness(0.76) contrast(1.06); transform: scale(1.0); }
         50%      { filter: saturate(1.25) brightness(0.86) contrast(1.10); transform: scale(1.06); }
     }
-
-    /* Hero text content */
-    .hero-content {
-        position: relative; z-index: 5;
-        padding-left: 60px; padding-right: 50%;
-    }
+    .hero-content { position: relative; z-index: 5; padding-left: 60px; padding-right: 50%; }
     .hero-eyebrow {
-        font-family: 'Outfit', sans-serif;
-        font-size: 11px; letter-spacing: .38em; text-transform: uppercase;
-        color: var(--red); margin-bottom: 22px;
-        opacity: 0; transform: translateY(16px);
+        font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: .38em; text-transform: uppercase;
+        color: var(--red); margin-bottom: 22px; opacity: 0; transform: translateY(16px);
         transition: opacity .7s .2s, transform .7s .2s;
     }
     .hero-eyebrow.vis { opacity: 1; transform: translateY(0); }
-
     .hero-line {
-        font-family: 'Big Shoulders Display', 'Impact', sans-serif;
-        font-weight: 900; text-transform: uppercase;
-        color: var(--white); line-height: 0.88;
-        letter-spacing: -0.02em;
-        font-size: clamp(72px, 12vw, 172px);
-        display: block;
-        opacity: 0; transform: translateY(40px);
-        transition: opacity .7s, transform .7s;
+        font-family: 'Big Shoulders Display', 'Impact', sans-serif; font-weight: 900; text-transform: uppercase;
+        color: var(--white); line-height: 0.88; letter-spacing: -0.02em;
+        font-size: clamp(72px, 12vw, 172px); display: block;
+        opacity: 0; transform: translateY(40px); transition: opacity .7s, transform .7s;
     }
     .hero-line.l1 { transition-delay: .3s; }
     .hero-line.l2 { transition-delay: .46s; color: var(--red); }
     .hero-line.vis { opacity: 1; transform: translateY(0); }
-
     .hero-zh {
         font-family: 'Noto Serif SC', serif; font-weight: 300;
         font-size: clamp(13px, 1.5vw, 18px); letter-spacing: .22em;
         color: rgba(247,238,233,.4); margin-top: 24px; margin-bottom: 8px;
-        opacity: 0; transform: translateY(14px);
-        transition: opacity .7s .62s, transform .7s .62s;
+        opacity: 0; transform: translateY(14px); transition: opacity .7s .62s, transform .7s .62s;
     }
     .hero-zh.vis { opacity: 1; transform: translateY(0); }
-
     .hero-sub {
-        font-family: 'Outfit', sans-serif; font-size: 15px;
-        color: rgba(247,238,233,.55); line-height: 1.65;
-        max-width: 360px; margin-bottom: 40px;
-        opacity: 0; transform: translateY(12px);
-        transition: opacity .7s .72s, transform .7s .72s;
+        font-family: 'Outfit', sans-serif; font-size: 15px; color: rgba(247,238,233,.55);
+        line-height: 1.65; max-width: 360px; margin-bottom: 40px;
+        opacity: 0; transform: translateY(12px); transition: opacity .7s .72s, transform .7s .72s;
     }
     .hero-sub.vis { opacity: 1; transform: translateY(0); }
-
     .hero-cta {
         display: flex; gap: 14px; flex-wrap: wrap;
-        opacity: 0; transform: translateY(12px);
-        transition: opacity .7s .86s, transform .7s .86s;
+        opacity: 0; transform: translateY(12px); transition: opacity .7s .86s, transform .7s .86s;
     }
     .hero-cta.vis { opacity: 1; transform: translateY(0); }
-
-    /* Scroll indicator */
     .scroll-ind {
         position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
         z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -160,36 +113,212 @@
     @keyframes fadeInAnim { to { opacity: 1; } }
     @keyframes glowPulse { 0%,100% { opacity:.8; } 50% { opacity:1; } }
 
-    /* ── Quick-link strip ── */
     .hero-strip {
         position: absolute; bottom: 0; left: 0; right: 0;
-        display: grid; grid-template-columns: repeat(4,1fr);
-        z-index: 6;
+        display: grid; grid-template-columns: repeat(4,1fr); z-index: 6;
     }
     .strip-item {
         padding: 20px 16px; text-align: center;
         background: rgba(12,6,4,.7); backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(228,30,43,.14);
-        border-right: 1px solid rgba(228,30,43,.08);
-        text-decoration: none;
-        transition: background .3s;
+        border-top: 1px solid rgba(228,30,43,.14); border-right: 1px solid rgba(228,30,43,.08);
+        text-decoration: none; transition: background .3s;
         display: flex; flex-direction: column; align-items: center; gap: 4px;
     }
     .strip-item:last-child { border-right: none; }
     .strip-item:hover { background: rgba(228,30,43,.12); }
     .strip-zh { font-family: 'Noto Serif SC', serif; font-size: 12px; color: rgba(228,30,43,.75); }
     .strip-en { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: rgba(247,238,233,.3); }
-
-    /* ── Skyline ── */
     .hero-skyline { position: absolute; bottom: 70px; left: 0; right: 0; height: 160px; z-index: 4; pointer-events: none; }
 
+    /* ── Scroll reveal ── */
+    .sr { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+    .sr.up { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: .1s; } .sr-d2 { transition-delay: .22s; }
+    .sr-d3 { transition-delay: .36s; } .sr-d4 { transition-delay: .5s; }
+
+    /* ── Section shared ── */
+    .sec { padding: 120px 60px; }
+    .sec-label {
+        font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: .42em;
+        text-transform: uppercase; color: var(--red); margin-bottom: 18px;
+        display: flex; align-items: center; gap: 14px;
+    }
+    .sec-label::before { content: ''; width: 32px; height: 1px; background: var(--red); opacity:.7; }
+    .sec-title {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        text-transform: uppercase; color: var(--white); line-height: .9;
+        letter-spacing: -.02em; font-size: clamp(44px, 7vw, 96px);
+    }
+    .sec-title em { font-style: normal; color: var(--red); }
+    .sec-body {
+        font-family: 'Outfit', sans-serif; font-size: 15px;
+        color: rgba(247,238,233,.5); line-height: 1.75; max-width: 480px;
+    }
+
+    /* ── About Split ── */
+    #about-teaser {
+        background: var(--bg); display: grid;
+        grid-template-columns: 1fr 1fr; gap: 80px;
+        align-items: center; padding: 140px 80px;
+    }
+    .about-img-wrap {
+        position: relative; border-radius: 2px; overflow: hidden;
+        aspect-ratio: 4/5;
+    }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.85) saturate(1.1); transition: transform 8s ease; }
+    .about-img-wrap:hover img { transform: scale(1.04); }
+    .about-img-wrap::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(228,30,43,.1) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .about-img-frame {
+        position: absolute; inset: 20px;
+        border: 1px solid rgba(228,30,43,.2); border-radius: 2px;
+        pointer-events: none; z-index: 2;
+    }
+    .about-text { display: flex; flex-direction: column; gap: 28px; }
+    .about-stat-row { display: flex; gap: 40px; margin-top: 12px; }
+    .about-stat { display: flex; flex-direction: column; gap: 4px; }
+    .about-stat-num {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        font-size: 52px; color: var(--red); line-height: 1;
+    }
+    .about-stat-label { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(247,238,233,.3); }
+
+    /* ── Pillars ── */
+    #pillars {
+        background: var(--dark); padding: 120px 80px;
+        border-top: 1px solid rgba(228,30,43,.1); border-bottom: 1px solid rgba(228,30,43,.1);
+    }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 64px; }
+    .pillar {
+        padding: 56px 44px; background: var(--surface);
+        border: 1px solid rgba(228,30,43,.1);
+        position: relative; overflow: hidden;
+        transition: background .3s, border-color .3s;
+    }
+    .pillar:hover { background: var(--card); border-color: rgba(228,30,43,.28); }
+    .pillar::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(228,30,43,.5), transparent);
+        opacity: 0; transition: opacity .3s;
+    }
+    .pillar:hover::before { opacity: 1; }
+    .pillar-num {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        font-size: 72px; color: rgba(228,30,43,.08); line-height: 1;
+        position: absolute; top: 24px; right: 28px;
+    }
+    .pillar-icon { font-size: 28px; margin-bottom: 28px; display: block; filter: drop-shadow(0 0 8px rgba(228,30,43,.4)); }
+    .pillar-title {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        font-size: 28px; text-transform: uppercase; color: var(--white);
+        letter-spacing: -.01em; margin-bottom: 16px; line-height: 1;
+    }
+    .pillar-body { font-family: 'Outfit', sans-serif; font-size: 14px; color: rgba(247,238,233,.42); line-height: 1.75; }
+
+    /* ── Dishes ── */
+    #dishes { background: var(--bg); padding: 140px 80px; }
+    .dishes-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .dish-card {
+        background: var(--surface); border: 1px solid rgba(228,30,43,.1);
+        border-radius: 2px; overflow: hidden;
+        transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .dish-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 30px rgba(228,30,43,.1); border-color: rgba(228,30,43,.28); }
+    .dish-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: brightness(.88) saturate(1.15); transition: transform .6s ease; }
+    .dish-card:hover .dish-img { transform: scale(1.05); }
+    .dish-info { padding: 28px 28px 32px; }
+    .dish-tag { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .dish-name { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 26px; text-transform: uppercase; color: var(--white); letter-spacing: -.01em; margin-bottom: 10px; }
+    .dish-desc { font-family: 'Outfit', sans-serif; font-size: 13px; color: rgba(247,238,233,.38); line-height: 1.7; }
+
+    /* ── Videos ── */
+    #video-section { background: var(--dark); padding: 140px 80px; border-top: 1px solid rgba(228,30,43,.1); }
+    .video-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px; margin-top: 64px; }
+    .video-wrap {
+        position: relative; border: 1px solid rgba(228,30,43,.18); border-radius: 2px;
+        overflow: hidden; background: #000;
+        box-shadow: 0 0 60px rgba(228,30,43,.08);
+        transition: box-shadow .3s, border-color .3s;
+    }
+    .video-wrap:hover { box-shadow: 0 0 80px rgba(228,30,43,.18); border-color: rgba(228,30,43,.32); }
+    .video-wrap video { width: 100%; display: block; }
+    .video-label {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        padding: 20px 24px 18px;
+        background: linear-gradient(to top, rgba(12,6,4,.9) 0%, transparent 100%);
+        font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: .24em;
+        text-transform: uppercase; color: rgba(247,238,233,.4);
+        pointer-events: none;
+    }
+
+    /* ── Gallery Teaser ── */
+    #gallery-teaser { background: var(--bg); padding: 140px 80px; }
+    .gallery-grid {
+        display: grid; margin-top: 64px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(2, 280px);
+        gap: 10px;
+    }
+    .g-cell { overflow: hidden; border-radius: 2px; position: relative; }
+    .g-cell img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.8) saturate(1.1); transition: transform .6s ease, filter .4s; }
+    .g-cell:hover img { transform: scale(1.06); filter: brightness(.95) saturate(1.2); }
+    .g-cell::after { content: ''; position: absolute; inset: 0; background: rgba(228,30,43,0); transition: background .3s; }
+    .g-cell:hover::after { background: rgba(228,30,43,.06); }
+    .g1 { grid-column: span 5; grid-row: span 2; }
+    .g2 { grid-column: span 4; }
+    .g3 { grid-column: span 3; }
+    .g4 { grid-column: span 3; }
+    .g5 { grid-column: span 4; }
+    .gallery-cta { margin-top: 48px; display: flex; justify-content: center; }
+
+    /* ── Reserve CTA ── */
+    #reserve-cta {
+        background: var(--dark); padding: 140px 80px;
+        border-top: 1px solid rgba(228,30,43,.12);
+        position: relative; overflow: hidden;
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    #reserve-cta::before {
+        content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+        width: 700px; height: 700px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(228,30,43,.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .reserve-zh {
+        font-family: 'Noto Serif SC', serif; font-size: 13px; letter-spacing: .32em;
+        color: rgba(228,30,43,.5); margin-bottom: 28px;
+    }
+    .reserve-title {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        font-size: clamp(56px, 10vw, 130px); text-transform: uppercase;
+        color: var(--white); line-height: .88; letter-spacing: -.02em; margin-bottom: 32px;
+    }
+    .reserve-title em { font-style: normal; color: var(--red); }
+    .reserve-body { font-family: 'Outfit', sans-serif; font-size: 15px; color: rgba(247,238,233,.42); max-width: 460px; line-height: 1.75; margin-bottom: 52px; }
+    .reserve-info-row { display: flex; gap: 60px; margin-bottom: 52px; justify-content: center; }
+    .reserve-info-item { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+    .reserve-info-label { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .36em; text-transform: uppercase; color: rgba(228,30,43,.6); }
+    .reserve-info-val { font-family: 'Outfit', sans-serif; font-size: 14px; color: rgba(247,238,233,.7); }
+
+    /* ── Responsive ── */
     @media (max-width: 900px) {
         .hero-content { padding-left: 24px; padding-right: 24px; }
         .hero-bowl { display: none; }
         .hero-bg-zh { display: none; }
         .hero-strip { grid-template-columns: repeat(3,1fr) !important; }
+        #about-teaser { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+        .about-img-wrap { aspect-ratio: 16/9; }
+        #pillars, #dishes, #video-section, #gallery-teaser, #reserve-cta { padding: 80px 24px; }
+        .pillars-grid, .dishes-grid, .video-grid { grid-template-columns: 1fr; }
+        .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+        .g1,.g2,.g3,.g4,.g5 { grid-column: span 1; grid-row: span 1; height: 220px; }
+        .dishes-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        .reserve-info-row { flex-direction: column; gap: 24px; }
     }
-
     </style>
 </head>
 <body>
@@ -221,7 +350,6 @@
     <div class="hero-glow"></div>
     <div class="hero-bg-zh">火</div>
 
-    <!-- Simulated hotpot bowl -->
     <div class="hero-bowl">
         <div class="hero-bowl-inner">
             <img src="logo/DSC02472.jpg" alt="" class="hero-bowl-logo">
@@ -240,7 +368,6 @@
         </div>
     </div>
 
-    <!-- City skyline -->
     <svg class="hero-skyline" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
@@ -261,7 +388,6 @@
         <rect x="0" y="0" width="1440" height="160" fill="url(#sg)"/>
     </svg>
 
-    <!-- Quick-link strip -->
     <div class="hero-strip" style="grid-template-columns: repeat(5,1fr);">
         <a href="about.html" class="strip-item">
             <span class="strip-zh zh-only">關於我們</span>
@@ -283,6 +409,185 @@
             <span class="strip-zh zh-only">訂　　座</span>
             <span class="strip-en" data-i18n="strip-res">Reservations</span>
         </a>
+    </div>
+</section>
+
+<!-- ABOUT TEASER -->
+<section id="about-teaser">
+    <div class="about-img-wrap sr">
+        <img src="Image/cooking.jpg" alt="Cooking at Dian Huo">
+        <div class="about-img-frame"></div>
+    </div>
+    <div class="about-text">
+        <div class="sr sr-d1">
+            <p class="sec-label" data-i18n="idx-about-label">Our Story · 我們的故事</p>
+            <h2 class="sec-title" data-i18n="idx-about-title">Born from<br><em>fire,</em><br>built for<br>the night.</h2>
+        </div>
+        <p class="sec-body sr sr-d2" data-i18n="idx-about-body">Dian Huo was born from a simple belief — that the best meals happen in the open air, under a darkening sky, with the heat of a hotpot between you and the people you love. Perched on Level 3, we built Petaling Jaya's most memorable rooftop table.</p>
+        <div class="about-stat-row sr sr-d3">
+            <div class="about-stat">
+                <span class="about-stat-num">3</span>
+                <span class="about-stat-label" data-i18n="idx-stat-floors">Floors Up</span>
+            </div>
+            <div class="about-stat">
+                <span class="about-stat-num">8+</span>
+                <span class="about-stat-label" data-i18n="idx-stat-broths">Signature Broths</span>
+            </div>
+            <div class="about-stat">
+                <span class="about-stat-num">∞</span>
+                <span class="about-stat-label" data-i18n="idx-stat-nights">Good Nights</span>
+            </div>
+        </div>
+        <div class="sr sr-d4">
+            <a href="about.html" class="btn-outline" data-i18n="idx-about-btn">Read Our Story</a>
+        </div>
+    </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="sr">
+            <p class="sec-label" data-i18n="idx-pillars-label">Why Dian Huo · 為何選擇我們</p>
+            <h2 class="sec-title" data-i18n="idx-pillars-title">The <em>experience</em><br>in three acts.</h2>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar sr sr-d1">
+                <span class="pillar-num">01</span>
+                <span class="pillar-icon">🏙️</span>
+                <h3 class="pillar-title" data-i18n="idx-pillar1-title">Open-Air Rooftop</h3>
+                <p class="pillar-body" data-i18n="idx-pillar1-body">Dine beneath the Petaling Jaya skyline on our open-air Level 3 terrace. Every table faces the city lights — a view that turns dinner into a moment.</p>
+            </div>
+            <div class="pillar sr sr-d2">
+                <span class="pillar-num">02</span>
+                <span class="pillar-icon">🍲</span>
+                <h3 class="pillar-title" data-i18n="idx-pillar2-title">Signature Broths</h3>
+                <p class="pillar-body" data-i18n="idx-pillar2-body">Eight house-crafted broths, from our slow-simmered Coconut Herbal to the signature Spicy Mala. Each pot is a recipe honed over hundreds of sittings.</p>
+            </div>
+            <div class="pillar sr sr-d3">
+                <span class="pillar-num">03</span>
+                <span class="pillar-icon">🥩</span>
+                <h3 class="pillar-title" data-i18n="idx-pillar3-title">Premium Cuts</h3>
+                <p class="pillar-body" data-i18n="idx-pillar3-body">Handmade balls, wagyu slices, and fresh seafood — sourced daily. Every ingredient on our table earns its place in the pot.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SIGNATURE DISHES -->
+<section id="dishes">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="dishes-header">
+            <div class="sr">
+                <p class="sec-label" data-i18n="idx-dishes-label">Signature Dishes · 招牌菜</p>
+                <h2 class="sec-title" data-i18n="idx-dishes-title">Made to<br><em>savour.</em></h2>
+            </div>
+            <div class="sr sr-d2">
+                <a href="menu.html" class="btn-outline" data-i18n="idx-dishes-btn">Full Menu</a>
+            </div>
+        </div>
+        <div class="dishes-grid">
+            <div class="dish-card sr sr-d1">
+                <div style="overflow:hidden;">
+                    <img class="dish-img" src="Image/coconut.herbal.soup.png" alt="Coconut Herbal Soup">
+                </div>
+                <div class="dish-info">
+                    <p class="dish-tag" data-i18n="idx-dish1-tag">Signature Broth</p>
+                    <h3 class="dish-name" data-i18n="idx-dish1-name">Coconut Herbal Soup</h3>
+                    <p class="dish-desc" data-i18n="idx-dish1-desc">A light, nourishing broth built on fresh coconut and Chinese herbs. Subtle sweetness, deep warmth.</p>
+                </div>
+            </div>
+            <div class="dish-card sr sr-d2">
+                <div style="overflow:hidden;">
+                    <img class="dish-img" src="Image/handmade ball.png" alt="Handmade Balls">
+                </div>
+                <div class="dish-info">
+                    <p class="dish-tag" data-i18n="idx-dish2-tag">House Specialty</p>
+                    <h3 class="dish-name" data-i18n="idx-dish2-name">Handmade Balls</h3>
+                    <p class="dish-desc" data-i18n="idx-dish2-desc">Crafted in-house daily — springy, flavour-packed, and made the way hotpot tradition demands.</p>
+                </div>
+            </div>
+            <div class="dish-card sr sr-d3">
+                <div style="overflow:hidden;">
+                    <img class="dish-img" src="Image/dish.png" alt="Signature Dish">
+                </div>
+                <div class="dish-info">
+                    <p class="dish-tag" data-i18n="idx-dish3-tag">Premium Platter</p>
+                    <h3 class="dish-name" data-i18n="idx-dish3-name">Chef's Selection</h3>
+                    <p class="dish-desc" data-i18n="idx-dish3-desc">The chef's daily premium platter — fresh market cuts arranged for the table to share.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="video-section">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="sr" style="display:flex; flex-direction:column; gap:16px; margin-bottom:0;">
+            <p class="sec-label" data-i18n="idx-video-label">In the Moment · 感受現場</p>
+            <h2 class="sec-title" data-i18n="idx-video-title">Feel the<br><em>fire.</em></h2>
+            <p class="sec-body" style="margin-top:8px;" data-i18n="idx-video-body">Step inside the rooftop. Every sizzle, every flame, every shared laugh — captured live.</p>
+        </div>
+        <div class="video-grid">
+            <div class="video-wrap sr sr-d2">
+                <video controls preload="metadata">
+                    <source src="video/video 1.mp4" type="video/mp4">
+                </video>
+                <div class="video-label" data-i18n="idx-video1-label">Rooftop Experience · Vol. 1</div>
+            </div>
+            <div class="video-wrap sr sr-d3">
+                <video controls preload="metadata">
+                    <source src="video/video 2.mp4" type="video/mp4">
+                </video>
+                <div class="video-label" data-i18n="idx-video2-label">Rooftop Experience · Vol. 2</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY TEASER -->
+<section id="gallery-teaser">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="sr" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;">
+            <div>
+                <p class="sec-label" data-i18n="idx-gallery-label">Gallery · 相冊</p>
+                <h2 class="sec-title" data-i18n="idx-gallery-title">Every night<br>tells a <em>story.</em></h2>
+            </div>
+            <a href="gallery.html" class="btn-outline sr sr-d2" data-i18n="idx-gallery-btn">View All Photos</a>
+        </div>
+        <div class="gallery-grid">
+            <div class="g-cell g1 sr sr-d1"><img src="gallery/DSC04894.jpg" alt="Gallery"></div>
+            <div class="g-cell g2 sr sr-d2"><img src="gallery/DSC05099.jpg" alt="Gallery"></div>
+            <div class="g-cell g3 sr sr-d3"><img src="gallery/DSC02302.jpg" alt="Gallery"></div>
+            <div class="g-cell g4 sr sr-d2"><img src="gallery/DSC05468 (1).jpg" alt="Gallery"></div>
+            <div class="g-cell g5 sr sr-d3"><img src="gallery/DSC04903.jpg" alt="Gallery"></div>
+        </div>
+    </div>
+</section>
+
+<!-- RESERVE CTA -->
+<section id="reserve-cta">
+    <p class="reserve-zh sr" data-i18n="idx-reserve-zh">點火心窩 · 訂座</p>
+    <h2 class="reserve-title sr sr-d1" data-i18n="idx-reserve-title">Claim your<br>seat <em>above</em><br>the city.</h2>
+    <p class="reserve-body sr sr-d2" data-i18n="idx-reserve-body">Tables fill fast on weekends. Reserve yours and arrive to an open sky, a glowing pot, and a night you won't forget.</p>
+    <div class="reserve-info-row sr sr-d2">
+        <div class="reserve-info-item">
+            <span class="reserve-info-label" data-i18n="idx-reserve-loc-label">Location</span>
+            <span class="reserve-info-val" data-i18n="idx-reserve-loc-val">Level 3, Jalan SS 24/9, PJ</span>
+        </div>
+        <div class="reserve-info-item">
+            <span class="reserve-info-label" data-i18n="idx-reserve-hrs-label">Hours</span>
+            <span class="reserve-info-val" data-i18n="idx-reserve-hrs-val">Mon – Sun · 5 pm – 12 am</span>
+        </div>
+        <div class="reserve-info-item">
+            <span class="reserve-info-label" data-i18n="idx-reserve-enq-label">Enquiries</span>
+            <span class="reserve-info-val">+60 17 878 7652</span>
+        </div>
+    </div>
+    <div class="sr sr-d3" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+        <a href="reserve.html" class="btn-primary"><span data-i18n="idx-reserve-btn">Reserve a Table</span></a>
+        <a href="https://wa.link/3f0hjs" class="btn-outline" data-i18n="idx-reserve-wa">WhatsApp Us</a>
     </div>
 </section>
 
@@ -325,12 +630,11 @@ window.addEventListener('load', () => {
     }, 150);
 });
 
-// Ember canvas — red-tinted particles
+// Ember canvas
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas.getContext('2d');
 function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resize(); window.addEventListener('resize', resize);
-
 class Ember {
     constructor(){ this.reset(true); }
     reset(init){
@@ -339,9 +643,7 @@ class Ember {
         this.r = Math.random() * 1.8 + 0.5;
         this.vy = -(Math.random() * 1.2 + 0.35);
         this.vx = (Math.random() - 0.5) * 0.6;
-        this.life = 0;
-        this.maxLife = Math.random() * 200 + 90;
-        // Hue 0-20 = red to orange
+        this.life = 0; this.maxLife = Math.random() * 200 + 90;
         this.hue = Math.random() * 22;
     }
     tick(){
@@ -364,6 +666,12 @@ class Ember {
 }
 const embers = Array.from({length:70}, () => new Ember());
 (function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); embers.forEach(e=>{e.tick();e.draw();}); requestAnimationFrame(loop); })();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.sr').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
