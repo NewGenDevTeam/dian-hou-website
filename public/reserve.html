@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve · 點火心窩 Dian Huo Hotpot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+    /* ── Reserve page ── */
+    #reserve { padding: 80px 0 130px; background: var(--bg); position: relative; }
+    #reserve::before {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 100%, rgba(228,30,43,.12) 0%, transparent 60%);
+    }
+
+    .reserve-layout { display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: start; }
+
+    /* Form side */
+    .form-side h2 {
+        font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+        font-size: clamp(42px, 6vw, 74px); text-transform: uppercase;
+        color: var(--white); line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 14px;
+    }
+    .form-side h2 em { font-style: normal; color: var(--red); }
+    .form-side > p { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 40px; }
+
+    .rform { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .rform .full { grid-column: 1 / -1; }
+    .fg { display: flex; flex-direction: column; gap: 6px; }
+    .fg label { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(228,30,43,.55); }
+    .fg input, .fg select, .fg textarea {
+        background: rgba(228,30,43,.04); border: 1px solid rgba(228,30,43,.14);
+        color: var(--off-white); padding: 12px 16px;
+        font-family: 'Outfit', sans-serif; font-size: 15px;
+        outline: none; appearance: none; border-radius: 0;
+        transition: border-color .25s, background .25s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+        border-color: var(--red); background: rgba(228,30,43,.07);
+    }
+    .fg input::placeholder { color: rgba(247,238,233,.2); }
+    .fg select option { background: #160906; }
+    .fg textarea { resize: none; height: 96px; }
+
+    /* Info panel */
+    .info-panel {
+        background: var(--surface); border: 1px solid rgba(228,30,43,.12);
+        padding: 44px 34px; position: sticky; top: 100px;
+    }
+    .info-logo {
+        display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
+        padding-bottom: 26px; border-bottom: 1px solid rgba(228,30,43,.14);
+    }
+    .info-logo img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(228,30,43,.3)); }
+    .info-logo-txt { font-family: 'Noto Serif SC', serif; font-size: 15px; color: var(--off-white); }
+    .info-logo-txt span { display: block; font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .22em; color: var(--red); text-transform: uppercase; margin-top: 2px; }
+
+    .info-block { margin-bottom: 24px; }
+    .info-lbl { font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(228,30,43,.5); margin-bottom: 7px; }
+    .info-val { font-family: 'Outfit', sans-serif; font-size: 14px; color: rgba(247,238,233,.6); line-height: 1.75; }
+    .info-val a { color: var(--red); text-decoration: none; transition: color .2s; }
+    .info-val a:hover { color: #ff4a55; }
+
+    .info-note { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(228,30,43,.1); font-family: 'Outfit', sans-serif; font-size: 12px; color: rgba(247,238,233,.28); line-height: 1.75; font-style: italic; }
+
+    /* Success */
+    .success-msg { display: none; text-align: center; padding: 44px 28px; background: rgba(20,60,10,.1); border: 1px solid rgba(60,180,40,.2); }
+    .success-msg.show { display: block; }
+    .success-msg h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 32px; text-transform: uppercase; color: #5DBF45; margin-bottom: 10px; }
+    .success-msg p { font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+        .reserve-layout { grid-template-columns: 1fr; gap: 40px; }
+        .info-panel { position: static; }
+        .rform { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-left">
+        <a href="about.html" class="nav-pill outline" data-i18n="nav-story">Story</a>
+        <a href="menu.html" class="nav-pill outline" data-i18n="nav-menu">Menu</a>
+    </div>
+    <a href="index.html" class="nav-center">
+        <img src="logo/dian huo logo.jpg" alt="Dian Huo Hotpot">
+        <div class="nav-brand">點火心窩 <span>Dian Huo Hotpot</span></div>
+    </a>
+    <div class="nav-right">
+        <a href="gallery.html" class="nav-pill outline" data-i18n="nav-gallery">Gallery</a>
+        <a href="experience.html" class="nav-pill outline" data-i18n="nav-experience">Experience</a>
+        <a href="reserve.html" class="nav-pill" data-i18n="nav-reserve">Reserve</a>
+        <button class="lang-toggle" id="langToggle">中文</button>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-hdr">
+    <div class="page-hdr-glow"></div>
+    <div class="page-hdr-bg">BOOK</div>
+    <div class="page-hdr-content">
+        <p class="label" style="justify-content:center;" data-i18n="res-hdr-label">Level 3 Rooftop</p>
+        <h1 class="page-hdr-title" data-i18n="res-hdr-title">CLAIM YOUR<br><em>TABLE IN THE SKY</em></h1>
+        <p class="page-hdr-zh" data-i18n="res-page-zh">訂座 · 點火心窩</p>
+    </div>
+</div>
+
+<!-- RESERVE -->
+<section id="reserve">
+    <div class="container">
+        <div class="reserve-layout">
+            <!-- Form -->
+            <div class="form-side">
+                <p class="label reveal" data-i18n="res-form-label">Make a Reservation</p>
+                <h2 class="reveal d1" data-i18n="res-form-h2">BOOK YOUR<br><em>EVENING ABOVE</em></h2>
+                <p class="reveal d2" data-i18n="res-form-p">Rooftop dining is intimate and our tables are few. Reserve ahead to secure your evening with the city at your feet.</p>
+
+                <form class="rform reveal d3" id="rForm" novalidate>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-name">Full Name *</label>
+                        <input type="text" placeholder="Your name" data-i18n-ph="res-ph-name" required>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-phone">Phone Number *</label>
+                        <input type="tel" placeholder="+60 12 345 6789" required>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-email">Email Address</label>
+                        <input type="email" placeholder="For confirmation" data-i18n-ph="res-ph-email">
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-date">Preferred Date *</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-time">Preferred Time *</label>
+                        <select required>
+                            <option value="" data-i18n-opt="res-time-default">Select a time</option>
+                            <option>5:00 PM</option>
+                            <option>6:00 PM</option>
+                            <option>6:30 PM</option>
+                            <option>7:00 PM</option>
+                            <option>7:30 PM</option>
+                            <option>8:00 PM</option>
+                            <option>8:30 PM</option>
+                            <option>9:00 PM</option>
+                            <option>9:30 PM</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-guests">Number of Guests *</label>
+                        <select required>
+                            <option value="" data-i18n-opt="res-guests-default">Select</option>
+                            <option>2 Guests</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                            <option>5 Guests</option>
+                            <option>6 Guests</option>
+                            <option>7–10 Guests (large group)</option>
+                            <option>11–20 Guests (private event)</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-occasion">Occasion</label>
+                        <select>
+                            <option>Casual Dinner</option>
+                            <option>Birthday Celebration</option>
+                            <option>Anniversary</option>
+                            <option>Proposal / Special Surprise</option>
+                            <option>Corporate Event</option>
+                            <option>Family Gathering</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="res-lbl-broth">Broth Preference</label>
+                        <select>
+                            <option>No preference</option>
+                            <option>Ma La Scarlet (Spicy)</option>
+                            <option>Herbal Clarity (Mild)</option>
+                            <option>Tomato & Milk (Mild)</option>
+                            <option>Half-half (Yin Yang pot)</option>
+                        </select>
+                    </div>
+                    <div class="fg full">
+                        <label data-i18n="res-lbl-requests">Special Requests</label>
+                        <textarea placeholder="Dietary requirements, decorations, seating preferences..." data-i18n-ph="res-ph-requests"></textarea>
+                    </div>
+                    <div class="fg full" style="margin-top:8px;">
+                        <button type="submit" class="btn-primary" style="width:100%;padding:18px;border-radius:0;"><span id="rBtnTxt" data-i18n="res-btn">CONFIRM RESERVATION</span></button>
+                    </div>
+                </form>
+                <div class="success-msg" id="successMsg">
+                    <h3 data-i18n="res-success-h3">RESERVATION RECEIVED ✓</h3>
+                    <p data-i18n="res-success-p">We'll confirm your rooftop table within 2 hours. Check your phone for a message from our team.</p>
+                </div>
+            </div>
+
+            <!-- Info panel -->
+            <div class="reveal d4">
+                <div class="info-panel">
+                    <div class="info-logo">
+                        <img src="logo/dian huo logo.jpg" alt="">
+                        <div class="info-logo-txt">點火心窩 <span>Dian Huo Hotpot</span></div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-lbl" data-i18n="info-lbl-location">Location</div>
+                        <div class="info-val" data-i18n="info-val-location">Level 3<br>Jalan SS 24/9<br>47301 Petaling Jaya</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-lbl" data-i18n="info-lbl-hours">Opening Hours</div>
+                        <div class="info-val" data-i18n="info-val-hours">Monday – Sunday<br>12:00 PM – 12:00 AM<br>Last order 11:30 PM</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-lbl" data-i18n="info-lbl-res">Reservations</div>
+                        <div class="info-val">
+                            <a href="https://wa.link/3f0hjs">+60 17 878 7652</a><br>
+                            <a href="mailto:urgo.adm@gmail.com">urgo.adm@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-lbl" data-i18n="info-lbl-private">Private Events</div>
+                        <div class="info-val" data-i18n="info-val-private">Groups of 10+, corporate bookings, and celebrations — call us directly for bespoke arrangements.</div>
+                    </div>
+                    <div class="info-note" data-i18n="info-note">Walk-ins welcome subject to availability. Recommend reserving at least 24 hours in advance for weekends.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="logo/dian huo logo.jpg" alt="Dian Huo Hotpot">
+                <div><div class="footer-brand">點火心窩 <span>Dian Huo Hotpot</span></div></div>
+            </div>
+            <div class="footer-info">
+                <div data-i18n="footer-addr">Level 3, Jalan SS 24/9, PJ</div>
+                <div><a href="https://wa.link/3f0hjs">+60 17 878 7652</a></div>
+                <div><a href="mailto:urgo.adm@gmail.com">urgo.adm@gmail.com</a></div>
+            </div>
+        </div>
+        <div class="footer-copy" data-i18n="footer-copy">© 2024 點火心窩 Dian Huo Hotpot · All rights reserved</div>
+    </div>
+</footer>
+
+<script src="js/lang.js" defer></script>
+<script src="js/main.js" defer></script>
+<script>
+document.getElementById('rForm').addEventListener('submit', e => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    window.scrollTo({ top: document.getElementById('successMsg').offsetTop - 120, behavior: 'smooth' });
+});
+</script>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/60178787652" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<style>
+.whatsapp-float{position:fixed;bottom:28px;right:28px;z-index:999999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);transition:background .2s,transform .2s,box-shadow .2s;text-decoration:none}
+.whatsapp-float:hover{background:#1ebe5d;transform:scale(1.08);box-shadow:0 6px 22px rgba(37,211,102,.6)}
+@media(max-width:600px){.whatsapp-float{bottom:18px;right:18px;width:54px;height:54px}.whatsapp-float svg{width:26px;height:26px}}
+</style>
+</body>
+</html>

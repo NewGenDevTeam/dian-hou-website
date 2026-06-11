@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "tag_en": "Chef's Selection",
+      "tag_zh": "廚師推薦",
+      "name_en": "Wagyu Beef Bloom",
+      "name_zh": "澳洲和牛肥牛片",
+      "desc_en": "Australian Wagyu, hand-sliced paper-thin. Watch the marbling bloom and dissolve in seconds in the bubbling broth. Order twice — you will want to.",
+      "desc_zh": "澳洲和牛，手切薄如蟬翼。看著油花在沸騰的湯底中瞬間綻放溶化。一份不夠——你一定會再點。",
+      "price": "RM 68",
+      "spice": 0,
+      "wide": true,
+      "quote_en": "\"The finest beef needs only fire and ten seconds.\"",
+      "quote_zh": "「最好的牛肉，只需要火與十秒鐘。」"
+    },
+    {
+      "tag_en": "Premium Cut",
+      "tag_zh": "頂級食材",
+      "name_en": "Lamb Shoulder",
+      "name_zh": "羊肉卷",
+      "desc_en": "Inner Mongolia lamb, sliced in neat rosettes. Sweet and rich in the Ma La broth.",
+      "desc_zh": "內蒙古羊肉，切成精緻卷形。在麻辣湯底中香甜馥郁。",
+      "price": "RM 38",
+      "spice": 0,
+      "wide": false
+    },
+    {
+      "tag_en": "Value Cut",
+      "tag_zh": "實惠之選",
+      "name_en": "Beef Brisket",
+      "name_zh": "牛腩片",
+      "desc_en": "A harder-working cut with more flavour. Tender when the broth is right.",
+      "desc_zh": "口感紮實，滋味更豐厚。湯底到位，嫩而不柴。",
+      "price": "RM 32",
+      "spice": 0,
+      "wide": false
+    },
+    {
+      "tag_en": "Ocean Fresh",
+      "tag_zh": "海鮮精選",
+      "name_en": "Live Tiger Prawn",
+      "name_zh": "鮮活虎蝦",
+      "desc_en": "Plucked live, delivered whole. Oceanic and impossibly fresh.",
+      "desc_zh": "現撈即送，完整呈現。海洋的鮮甜，無可比擬。",
+      "price": "RM 48",
+      "spice": 0,
+      "wide": false
+    }
+  ]
+}
