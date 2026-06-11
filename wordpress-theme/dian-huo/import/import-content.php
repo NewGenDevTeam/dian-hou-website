@@ -69,7 +69,7 @@ function dh_import_post(string $type, array $fields, string $title, int $order):
 }
 
 // ── Broths ────────────────────────────────────────────────────────────────────
-$broths_file = __DIR__ . '/../../content/broths.json';
+$broths_file = __DIR__ . '/../content/broths.json';
 if (file_exists($broths_file)) {
     $broths = json_decode(file_get_contents($broths_file), true)['items'] ?? [];
     echo "\n=== Importing Broths ===\n";
@@ -90,7 +90,7 @@ if (file_exists($broths_file)) {
 }
 
 // ── Proteins ──────────────────────────────────────────────────────────────────
-$proteins_file = __DIR__ . '/../../content/proteins.json';
+$proteins_file = __DIR__ . '/../content/proteins.json';
 if (file_exists($proteins_file)) {
     $proteins = json_decode(file_get_contents($proteins_file), true)['items'] ?? [];
     echo "\n=== Importing Proteins ===\n";
@@ -113,7 +113,7 @@ if (file_exists($proteins_file)) {
 }
 
 // ── Specials ──────────────────────────────────────────────────────────────────
-$specials_file = __DIR__ . '/../../content/specials.json';
+$specials_file = __DIR__ . '/../content/specials.json';
 if (file_exists($specials_file)) {
     $specials = json_decode(file_get_contents($specials_file), true)['items'] ?? [];
     echo "\n=== Importing Specials ===\n";
@@ -133,7 +133,7 @@ if (file_exists($specials_file)) {
 }
 
 // ── Contact Options ───────────────────────────────────────────────────────────
-$contact_file = __DIR__ . '/../../content/contact.json';
+$contact_file = __DIR__ . '/../content/contact.json';
 if (file_exists($contact_file) && function_exists('update_field')) {
     $c = json_decode(file_get_contents($contact_file), true);
     echo "\n=== Importing Contact Info ===\n";

@@ -136,8 +136,6 @@ if (empty($gallery_imgs)) {
     foreach ($fallback as $f) $gallery_imgs[] = ['url' => "$uri/assets/gallery/" . urlencode($f), 'alt' => 'Dian Huo Hotpot'];
 }
 
-// Dishes: try dh_broth CPT, fallback to static
-$broth_posts = get_posts(['post_type' => 'dh_broth', 'posts_per_page' => 3, 'orderby' => 'menu_order', 'order' => 'ASC']);
 ?>
 
 <!-- HERO -->
@@ -261,27 +259,36 @@ $broth_posts = get_posts(['post_type' => 'dh_broth', 'posts_per_page' => 3, 'ord
             <a href="<?php echo esc_url(home_url('/menu/')); ?>" class="btn-outline sr sr-d2" data-i18n="idx-dishes-btn">Full Menu</a>
         </div>
         <div class="dishes-grid">
-            <?php if (!empty($broth_posts)): foreach ($broth_posts as $bp):
-                $tag  = get_field('tag_en', $bp->ID)  ?: 'Signature Broth';
-                $name = get_field('name_en', $bp->ID) ?: get_the_title($bp);
-                $desc = get_field('desc_en', $bp->ID) ?: '';
-                $img  = get_the_post_thumbnail_url($bp->ID, 'medium_large') ?: "$uri/assets/images/dish.png";
-            ?>
-            <div class="dish-card sr">
+            <div class="dish-card sr sr-d1">
                 <div style="overflow:hidden;">
-                    <img class="dish-img" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name); ?>">
+                    <img class="dish-img" src="<?php echo esc_url("$uri/assets/images/coconut-herbal-soup.png"); ?>" alt="Coconut Herbal Soup">
                 </div>
                 <div class="dish-info">
-                    <p class="dish-tag"><?php echo esc_html($tag); ?></p>
-                    <h3 class="dish-name"><?php echo esc_html($name); ?></h3>
-                    <p class="dish-desc"><?php echo esc_html($desc); ?></p>
+                    <p class="dish-tag" data-i18n="idx-dish1-tag">Signature Broth</p>
+                    <h3 class="dish-name" data-i18n="idx-dish1-name">Coconut Herbal Soup</h3>
+                    <p class="dish-desc" data-i18n="idx-dish1-desc">A light, nourishing broth built on fresh coconut and Chinese herbs.</p>
                 </div>
             </div>
-            <?php endforeach; else: ?>
-            <div class="dish-card sr sr-d1"><div style="overflow:hidden;"><img class="dish-img" src="<?php echo esc_url("$uri/assets/images/coconut-herbal-soup.png"); ?>" alt="Coconut Herbal Soup"></div><div class="dish-info"><p class="dish-tag" data-i18n="idx-dish1-tag">Signature Broth</p><h3 class="dish-name" data-i18n="idx-dish1-name">Coconut Herbal Soup</h3><p class="dish-desc" data-i18n="idx-dish1-desc">A light, nourishing broth built on fresh coconut and Chinese herbs.</p></div></div>
-            <div class="dish-card sr sr-d2"><div style="overflow:hidden;"><img class="dish-img" src="<?php echo esc_url("$uri/assets/images/handmade-ball.png"); ?>" alt="Handmade Balls"></div><div class="dish-info"><p class="dish-tag" data-i18n="idx-dish2-tag">House Specialty</p><h3 class="dish-name" data-i18n="idx-dish2-name">Handmade Balls</h3><p class="dish-desc" data-i18n="idx-dish2-desc">Crafted in-house daily — springy and flavour-packed.</p></div></div>
-            <div class="dish-card sr sr-d3"><div style="overflow:hidden;"><img class="dish-img" src="<?php echo esc_url("$uri/assets/images/dish.png"); ?>" alt="Chef's Selection"></div><div class="dish-info"><p class="dish-tag" data-i18n="idx-dish3-tag">Premium Platter</p><h3 class="dish-name" data-i18n="idx-dish3-name">Chef's Selection</h3><p class="dish-desc" data-i18n="idx-dish3-desc">The chef's daily premium platter — fresh market cuts for the table.</p></div></div>
-            <?php endif; ?>
+            <div class="dish-card sr sr-d2">
+                <div style="overflow:hidden;">
+                    <img class="dish-img" src="<?php echo esc_url("$uri/assets/images/handmade-ball.png"); ?>" alt="Handmade Balls">
+                </div>
+                <div class="dish-info">
+                    <p class="dish-tag" data-i18n="idx-dish2-tag">House Specialty</p>
+                    <h3 class="dish-name" data-i18n="idx-dish2-name">Handmade Balls</h3>
+                    <p class="dish-desc" data-i18n="idx-dish2-desc">Crafted in-house daily — springy and flavour-packed.</p>
+                </div>
+            </div>
+            <div class="dish-card sr sr-d3">
+                <div style="overflow:hidden;">
+                    <img class="dish-img" src="<?php echo esc_url("$uri/assets/images/dish.png"); ?>" alt="Chef's Selection">
+                </div>
+                <div class="dish-info">
+                    <p class="dish-tag" data-i18n="idx-dish3-tag">Premium Platter</p>
+                    <h3 class="dish-name" data-i18n="idx-dish3-name">Chef's Selection</h3>
+                    <p class="dish-desc" data-i18n="idx-dish3-desc">The chef's daily premium platter — fresh market cuts for the table.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

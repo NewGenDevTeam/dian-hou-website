@@ -55,10 +55,10 @@ const TRANSLATIONS = {
     'about-btn-book': 'Book Your Evening',
     // Menu
     'menu-hdr-label': 'Crafted Daily',
-    'menu-hdr-title': 'CHOOSE<br><em>YOUR SOUP BASED</em>',
+    'menu-hdr-title': 'CHOOSE<br><em>YOUR SOUP BASE</em>',
     'broth-label': 'The Foundation',
     'broth-h2': 'SIGNATURE<br><em>BROTHS</em>',
-    'broth-sub': 'Every great hotpot begins with the broth. Choose your soup based — the soul of your evening.',
+    'broth-sub': 'Every great hotpot begins with the broth. Choose your soup base — the soul of your evening.',
     'mala-tag': 'House Signature',
     'mala-h3': 'Fresh Coconut Herbal Chicken',
     'mala-p': 'A refreshing and nourishing soup base slow-simmered with coconut water, herbs, and tender chicken. Naturally sweet, aromatic, and comforting in every sip.',

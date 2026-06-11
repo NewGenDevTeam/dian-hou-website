@@ -42,7 +42,7 @@ get_header(); ?>
 
 <div class="page-hdr">
     <div class="page-hdr-glow"></div>
-    <div class="page-hdr-bg">STORY</div>
+    <div class="page-hdr-bg">FIRE</div>
     <div class="page-hdr-content">
         <p class="label" style="justify-content:center;" data-i18n="about-hdr-label">Est. 2024</p>
         <h1 class="page-hdr-title" data-i18n="about-hdr-title">OUR <em>STORY</em></h1>

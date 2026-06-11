@@ -126,11 +126,11 @@ $wkin_zh  = dh_opt('walkin_zh','設有即場座位，視乎當日情況而定。
                         </select>
                     </div>
                     <div class="fg full">
-                        <label data-i18n="res-lbl-notes">Special Requests</label>
+                        <label data-i18n="res-lbl-requests">Special Requests</label>
                         <textarea name="notes" placeholder="Allergies, celebrations, seating preferences…"></textarea>
                     </div>
                     <div class="rform-submit full">
-                        <button type="submit" id="rSubmit" data-i18n="res-btn-submit">Confirm Reservation</button>
+                        <button type="submit" id="rSubmit" data-i18n="res-btn">CONFIRM RESERVATION</button>
                     </div>
                 </form>
 
@@ -146,24 +146,24 @@ $wkin_zh  = dh_opt('walkin_zh','設有即場座位，視乎當日情況而定。
                 <div class="info-logo-txt">點火心窩<span>Dian Huo Hotpot</span></div>
 
                 <div class="info-block">
-                    <div class="info-lbl" data-i18n="res-info-hours">Opening Hours</div>
+                    <div class="info-lbl" data-i18n="info-lbl-hours">Opening Hours</div>
                     <div class="info-val en-only"><?php echo esc_html($hours_en); ?></div>
                     <div class="info-val zh-only"><?php echo esc_html($hours_zh); ?></div>
                 </div>
                 <div class="info-block">
-                    <div class="info-lbl" data-i18n="res-info-location">Location</div>
+                    <div class="info-lbl" data-i18n="info-lbl-location">Location</div>
                     <div class="info-val en-only"><?php echo esc_html($loc_en); ?></div>
                     <div class="info-val zh-only"><?php echo esc_html($loc_zh); ?></div>
                 </div>
                 <div class="info-block">
-                    <div class="info-lbl" data-i18n="res-info-contact">Contact</div>
+                    <div class="info-lbl" data-i18n="info-lbl-res">Contact</div>
                     <div class="info-val">
                         <a href="<?php echo esc_url($wa); ?>"><?php echo esc_html($phone); ?></a><br>
                         <a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a>
                     </div>
                 </div>
                 <div class="info-block">
-                    <div class="info-lbl" data-i18n="res-info-private">Private Events</div>
+                    <div class="info-lbl" data-i18n="info-lbl-private">Private Events</div>
                     <div class="info-val en-only"><?php echo esc_html($priv_en); ?></div>
                     <div class="info-val zh-only"><?php echo esc_html($priv_zh); ?></div>
                 </div>
