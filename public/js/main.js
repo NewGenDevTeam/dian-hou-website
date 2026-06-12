@@ -42,3 +42,30 @@ const revObs = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.08, rootMargin: '0px 0px -44px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// Reserve page — WhatsApp submission
+const rForm = document.getElementById('rForm');
+if (rForm) {
+    rForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!rForm.reportValidity()) return;
+        const d = new FormData(rForm);
+        const val = k => d.get(k)?.trim() || '-';
+        const msg = [
+            '*New Reservation — Dian Huo Hotpot*',
+            'Name: '     + val('name'),
+            'Phone: '    + val('phone'),
+            'Email: '    + val('email'),
+            'Date: '     + val('date'),
+            'Time: '     + val('time'),
+            'Guests: '   + val('guests'),
+            'Occasion: ' + val('occasion'),
+            'Broth: '    + val('broth'),
+            'Requests: ' + val('requests')
+        ].join('\n');
+        window.open('https://wa.me/60178787652?text=' + encodeURIComponent(msg), '_blank');
+        rForm.style.display = 'none';
+        document.getElementById('successMsg').classList.add('show');
+        window.scrollTo({ top: document.getElementById('successMsg').offsetTop - 120, behavior: 'smooth' });
+    });
+}
