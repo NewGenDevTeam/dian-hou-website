@@ -44,6 +44,11 @@
     .fg input::placeholder { color: rgba(247,238,233,.2); }
     .fg select option { background: #160906; }
     .fg textarea { resize: none; height: 96px; }
+    .fg input[type="date"] { cursor: pointer; }
+    .fg input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1) sepia(1) saturate(4) hue-rotate(310deg);
+        opacity: .75; cursor: pointer;
+    }
 
     /* Info panel */
     .info-panel {

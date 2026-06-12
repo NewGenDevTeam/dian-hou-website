@@ -68,4 +68,14 @@ if (rForm) {
         document.getElementById('successMsg').classList.add('show');
         window.scrollTo({ top: document.getElementById('successMsg').offsetTop - 120, behavior: 'smooth' });
     });
+
+    const dateInput = rForm.querySelector('input[type="date"]');
+    if (dateInput) {
+        dateInput.min = new Date().toISOString().split('T')[0];
+        dateInput.addEventListener('click', function () {
+            if (typeof this.showPicker === 'function') {
+                try { this.showPicker(); } catch (_) {}
+            }
+        });
+    }
 }
