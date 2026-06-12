@@ -193,30 +193,32 @@
     }
     .pillars-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 64px; }
     .pillar {
-        padding: 56px 44px; background: var(--surface);
-        border: 1px solid rgba(228,30,43,.1);
+        padding: 56px 44px;
+        border: 1px solid rgba(228,30,43,.15);
         position: relative; overflow: hidden;
-        transition: background .3s, border-color .3s;
+        min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end;
+        background-size: cover; background-position: center; background-repeat: no-repeat;
+        transition: border-color .3s, box-shadow .3s;
     }
-    .pillar:hover { background: var(--card); border-color: rgba(228,30,43,.28); }
+    .pillar:hover { border-color: rgba(228,30,43,.4); box-shadow: 0 0 40px rgba(228,30,43,.15); }
     .pillar::before {
-        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(228,30,43,.5), transparent);
-        opacity: 0; transition: opacity .3s;
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(12,4,2,.3) 0%, rgba(12,4,2,.82) 100%);
+        z-index: 0; transition: opacity .3s;
     }
-    .pillar:hover::before { opacity: 1; }
+    .pillar:hover::before { opacity: 0.88; }
     .pillar-num {
         font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
-        font-size: 72px; color: rgba(228,30,43,.08); line-height: 1;
-        position: absolute; top: 24px; right: 28px;
+        font-size: 72px; color: rgba(228,30,43,.55); line-height: 1;
+        position: absolute; top: 24px; right: 28px; z-index: 1;
     }
-    .pillar-icon { font-size: 28px; margin-bottom: 28px; display: block; filter: drop-shadow(0 0 8px rgba(228,30,43,.4)); }
     .pillar-title {
         font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
         font-size: 28px; text-transform: uppercase; color: var(--white);
         letter-spacing: -.01em; margin-bottom: 16px; line-height: 1;
+        position: relative; z-index: 1;
     }
-    .pillar-body { font-family: 'Outfit', sans-serif; font-size: 14px; color: rgba(247,238,233,.42); line-height: 1.75; }
+    .pillar-body { font-family: 'Outfit', sans-serif; font-size: 14px; color: rgba(247,238,233,.82); line-height: 1.75; position: relative; z-index: 1; }
 
     /* ── Dishes ── */
     #dishes { background: var(--bg); padding: 140px 80px; }
@@ -452,21 +454,18 @@
             <h2 class="sec-title" data-i18n="idx-pillars-title">The <em>experience</em><br>in three acts.</h2>
         </div>
         <div class="pillars-grid">
-            <div class="pillar sr sr-d1">
+            <div class="pillar sr sr-d1" style="background-image: url('/images/experience/experience-rooftop.jpg');">
                 <span class="pillar-num">01</span>
-                <span class="pillar-icon">🏙️</span>
                 <h3 class="pillar-title" data-i18n="idx-pillar1-title">Open-Air Rooftop</h3>
                 <p class="pillar-body" data-i18n="idx-pillar1-body">Dine beneath the Petaling Jaya skyline on our open-air Level 3 terrace. Every table faces the city lights — a view that turns dinner into a moment.</p>
             </div>
-            <div class="pillar sr sr-d2">
+            <div class="pillar sr sr-d2" style="background-image: url('/images/experience/experience-broth.jpg');">
                 <span class="pillar-num">02</span>
-                <span class="pillar-icon">🍲</span>
                 <h3 class="pillar-title" data-i18n="idx-pillar2-title">Signature Broths</h3>
                 <p class="pillar-body" data-i18n="idx-pillar2-body">Eight house-crafted broths, from our slow-simmered Coconut Herbal to the signature Spicy Mala. Each pot is a recipe honed over hundreds of sittings.</p>
             </div>
-            <div class="pillar sr sr-d3">
+            <div class="pillar sr sr-d3" style="background-image: url('/images/experience/experience-cuts.jpg');">
                 <span class="pillar-num">03</span>
-                <span class="pillar-icon">🥩</span>
                 <h3 class="pillar-title" data-i18n="idx-pillar3-title">Premium Cuts</h3>
                 <p class="pillar-body" data-i18n="idx-pillar3-body">Handmade balls, wagyu slices, and fresh seafood — sourced daily. Every ingredient on our table earns its place in the pot.</p>
             </div>
