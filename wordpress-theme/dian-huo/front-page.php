@@ -345,7 +345,7 @@ if (empty($gallery_imgs)) {
     <div class="reserve-info-row sr sr-d2">
         <div class="reserve-info-item">
             <span class="reserve-info-label" data-i18n="idx-reserve-loc-label">Location</span>
-            <span class="reserve-info-val en-only"><?php echo dh_opt('address_en','Level 3, Jalan SS 24/9, PJ'); ?></span>
+            <span class="reserve-info-val en-only"><?php echo dh_opt('address_en','Level 3, Megah Rise Mall, Jalan SS 24/9, 47301 Petaling Jaya'); ?></span>
             <span class="reserve-info-val zh-only"><?php echo dh_opt('address_zh','白蒲 SS 24/9路 3樓'); ?></span>
         </div>
         <div class="reserve-info-item">

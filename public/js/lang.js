@@ -7,7 +7,7 @@ const TRANSLATIONS = {
     'nav-experience': 'Experience',
     'nav-reserve': 'Reserve',
     // Footer
-    'footer-addr': 'Level 3, Jalan SS 24/9, PJ',
+    'footer-addr': 'Level 3, Megah Rise Mall',
     'footer-copy': '© 2024 點火心窩 Dian Huo Hotpot · All rights reserved',
     // Index hero
     'hero-l1': 'OPEN AIR',
@@ -201,9 +201,9 @@ const TRANSLATIONS = {
     'idx-reserve-title': 'Claim your<br>seat <em>above</em><br>the city.',
     'idx-reserve-body': 'Tables fill fast on weekends. Reserve yours and arrive to an open sky, a glowing pot, and a night you won\'t forget.',
     'idx-reserve-loc-label': 'Location',
-    'idx-reserve-loc-val': 'Level 3, Jalan SS 24/9, PJ',
+    'idx-reserve-loc-val': 'Level 3, Megah Rise Mall',
     'idx-reserve-hrs-label': 'Hours',
-    'idx-reserve-hrs-val': 'Mon – Sun · 5 pm – 12 am',
+    'idx-reserve-hrs-val': 'Mon – Sun · 12 pm – 12 am',
     'idx-reserve-enq-label': 'Enquiries',
     'idx-reserve-btn': 'Reserve a Table',
     'idx-reserve-wa': 'WhatsApp Us',

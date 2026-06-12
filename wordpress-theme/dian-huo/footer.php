@@ -2,7 +2,7 @@
 $phone    = dh_opt('phone',     '+60 17 878 7652');
 $wa       = dh_opt_url('whatsapp', 'https://wa.link/3f0hjs');
 $email    = dh_opt('contact_email', 'urgo.adm@gmail.com');
-$addr_en  = dh_opt('address_en',  'Level 3, Jalan SS 24/9, PJ');
+$addr_en  = dh_opt('address_en',  'Level 3, Megah Rise Mall, Jalan SS 24/9, 47301 Petaling Jaya');
 $addr_zh  = dh_opt('address_zh',  '白蒲 SS 24/9路 3樓');
 ?>
 <footer>
