@@ -80,7 +80,7 @@ nav.scrolled {
     height: 50px; width: auto; object-fit: contain;
 }
 .nav-brand {
-    font-family: 'Noto Serif SC', serif;
+    font-family: 'Noto Serif TC', 'Noto Serif SC', serif;
     font-size: 22px; color: var(--off-white);
     line-height: 1.2;
     display: flex; flex-direction: column; justify-content: center;
@@ -178,7 +178,7 @@ nav.scrolled {
     background: linear-gradient(90deg, transparent, rgba(228,30,43,0.32), transparent);
 }
 .ornament-line span {
-    font-family: 'Noto Serif SC', serif; font-size: 16px;
+    font-family: 'Noto Serif TC', 'Noto Serif SC', serif; font-size: 16px;
     color: rgba(228,30,43,.5);
 }
 
@@ -215,7 +215,7 @@ nav.scrolled {
     font-style: normal; color: var(--red);
 }
 .page-hdr-zh {
-    font-family: 'Noto Serif SC', serif; font-size: 13px;
+    font-family: 'Noto Serif TC', 'Noto Serif SC', serif; font-size: 13px;
     letter-spacing: .2em; color: rgba(247,238,233,0.38);
 }
 @keyframes glowPulse { 0%,100% { opacity:.7; } 50% { opacity:1.1; } }
@@ -232,7 +232,7 @@ footer {
     width: 46px; height: 46px; object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(228,30,43,0.3));
 }
-.footer-brand { font-family: 'Noto Serif SC', serif; font-size: 16px; color: var(--off-white); }
+.footer-brand { font-family: 'Noto Serif TC', 'Noto Serif SC', serif; font-size: 16px; color: var(--off-white); }
 .footer-brand span { display: block; font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: .24em; color: var(--red); text-transform: uppercase; margin-top: 2px; }
 .footer-info { text-align: right; font-size: 13px; font-family: 'Outfit', sans-serif; color: rgba(247,238,233,.3); line-height: 1.9; }
 .footer-info a { color: rgba(228,30,43,.6); text-decoration: none; transition: color .2s; }
@@ -258,7 +258,7 @@ html.lang-zh .en-only { display: none !important; }
     border: 1.5px solid rgba(228,30,43,0.45);
     color: rgba(228,30,43,0.9);
     padding: 6px 14px; border-radius: 100px;
-    font-family: 'Noto Serif SC', serif;
+    font-family: 'Noto Serif TC', 'Noto Serif SC', serif;
     font-size: 11px; letter-spacing: .1em;
     cursor: pointer; white-space: nowrap;
     transition: background .25s, color .25s, border-color .25s;

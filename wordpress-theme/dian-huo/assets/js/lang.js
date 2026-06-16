@@ -308,7 +308,7 @@ const TRANSLATIONS = {
     'menu-btn-reserve': '立即訂座',
     // Experience
     'exp-hdr-label': '三樓露台',
-    'exp-hdr-title': '露天火锅<em>體驗</em>',
+    'exp-hdr-title': '露天火鍋<em>體驗</em>',
     'exp-intro-label': '五個前來的理由',
     'exp-intro-h2': '城市<br><em>之巔</em>',
     'exp-tile1-h3': '全景天台',
@@ -399,8 +399,8 @@ const TRANSLATIONS = {
     'idx-video-label': '感受現場',
     'idx-video-title': '感受<br><em>火焰。</em>',
     'idx-video-body': '踏上天台，感受每一聲滋滋作響、每一團火焰、每一陣共同的笑聲——全都記錄在此。',
-    'idx-video1-label': '露天火锅體驗 · 第一集',
-    'idx-video2-label': '露天火锅體驗 · 第二集',
+    'idx-video1-label': '露天火鍋體驗 · 第一集',
+    'idx-video2-label': '露天火鍋體驗 · 第二集',
     // Index — Gallery teaser
     'idx-gallery-label': '相冊',
     'idx-gallery-title': '每個夜晚<br>都說一個<em>故事。</em>',

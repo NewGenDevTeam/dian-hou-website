@@ -71,9 +71,22 @@ function serveFallback(res, reason) {
     res.sendFile(path.join(__dirname, 'public', 'content', 'gallery.json'));
 }
 
+// Cache static assets — long TTL for images/fonts/css/js, no-cache for HTML
+app.use((req, res, next) => {
+    if (/\.(jpg|jpeg|png|webp|gif|svg|ico|woff2?|ttf|otf)$/i.test(req.path)) {
+        res.set('Cache-Control', 'public, max-age=604800');
+    } else if (/\.(css|js)$/i.test(req.path)) {
+        res.set('Cache-Control', 'public, max-age=86400');
+    } else if (/\.html?$/i.test(req.path)) {
+        res.set('Cache-Control', 'no-cache');
+    }
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
+  res.set('Cache-Control', 'no-cache');
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
