@@ -229,10 +229,20 @@
         lbCounter.textContent = (current + 1) + ' / ' + items.length;
     }
 
-    fetch('/content/gallery.json')
-        .then(function(r) { return r.json(); })
-        .then(function(data) { renderGallery(data.images || []); })
-        .catch(function() {
+    fetch('/api/gallery?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status + ' from /api/gallery');
+            return r.json();
+        })
+        .then(function(data) {
+            console.log('[gallery] source:', data.source || 'fallback-json', '| images:', (data.images || []).length);
+            if (!data.images || data.images.length === 0) {
+                console.warn('[gallery] Zero images returned. Check server log and confirm dh_gallery posts have a Featured Image set in WordPress.');
+            }
+            renderGallery(data.images || []);
+        })
+        .catch(function(err) {
+            console.error('[gallery] Failed to load gallery:', err);
             document.getElementById('galleryGrid').innerHTML =
                 '<p style="color:rgba(247,238,233,.3);padding:40px 0;grid-column:1/-1;">Unable to load gallery. Please refresh.</p>';
         });

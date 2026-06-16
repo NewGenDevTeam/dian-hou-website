@@ -4,18 +4,13 @@
  */
 get_header();
 
-$uri = get_template_directory_uri();
-
-// Image order matches gallery.json
-$static_images = [
-    'DSC04894.jpg','DSC04903.jpg','DSC04929.jpg','DSC04930.jpg',
-    'DSC04977.jpg','DSC04986.jpg','DSC05099.jpg','DSC05121.jpg',
-    'DSC05156.jpg','DSC05229.jpg','DSC05294.jpg','DSC05393.jpg',
-    'DSC05468 (1).jpg','DSC05494.jpg','DSC05528 (1).jpg','DSC05545 (1).jpg',
-    'DSC05547.jpg','DSC05548 (1).jpg','DSC05549.jpg','DSC05551.jpg',
-    'DSC05569.jpg','DSC02302.jpg','DSC02367.jpg','DSC02538.jpg',
-    'DSC02548.jpg','DSC02556.jpg','DSC02572.jpg','DSC02576.jpg',
-];
+$gallery_query = new WP_Query([
+    'post_type'      => 'dh_gallery',
+    'post_status'    => 'publish',
+    'posts_per_page' => 100,
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+]);
 ?>
 <style>
 #gallery { padding: 60px 0 120px; background: var(--dark); position: relative; }
@@ -58,13 +53,19 @@ $static_images = [
     <div class="container">
         <p class="gallery-sub reveal" style="margin-bottom:40px;" data-i18n="gallery-sub">A glimpse into the world above the city.</p>
         <div class="gallery-grid">
-            <?php foreach ($static_images as $filename): ?>
-            <div class="gallery-item" data-hover>
-                <img src="<?php echo esc_url("$uri/assets/gallery/" . rawurlencode($filename)); ?>" loading="lazy" alt="Dian Huo Hotpot">
-                <div class="gallery-item-overlay"></div>
-                <span class="gallery-item-icon">&#8853;</span>
-            </div>
-            <?php endforeach; ?>
+            <?php if ($gallery_query->have_posts()): ?>
+                <?php while ($gallery_query->have_posts()): $gallery_query->the_post(); ?>
+                    <?php if (has_post_thumbnail()): ?>
+                    <div class="gallery-item" data-hover>
+                        <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'full')); ?>" loading="lazy" alt="<?php echo esc_attr(get_post_meta(get_the_ID(), '_wp_attachment_image_alt', true) ?: get_the_title() ?: 'Dian Huo Hotpot'); ?>">
+                        <div class="gallery-item-overlay"></div>
+                        <span class="gallery-item-icon">&#8853;</span>
+                    </div>
+                    <?php endif; ?>
+                <?php endwhile; wp_reset_postdata(); ?>
+            <?php else: ?>
+                <p style="color:rgba(247,238,233,.3);padding:40px 0;grid-column:1/-1;">No gallery photos found.</p>
+            <?php endif; ?>
         </div>
     </div>
 </section>
