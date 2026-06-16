@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu · 點火心窩 Dian Huo Hotpot</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=10">
+    <link rel="shortcut icon" href="/favicon.ico?v=10">
+    <link rel="apple-touch-icon" href="/favicon.png?v=10">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
@@ -103,6 +106,78 @@
         .wide-quote { text-align: left; }
         .menu-cat-banner { height: auto; }
     }
+
+    /* ── Category cards ── */
+    .menu-category-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+    }
+    .menu-cat-card {
+        background: var(--dark);
+        padding: 32px 28px;
+        border: 1px solid rgba(228,30,43,.06);
+        position: relative;
+        overflow: hidden;
+        transition: transform .35s;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        contain: layout style;
+    }
+    /* Background image — only transform animates (GPU-composited, no repaint) */
+    .cat-bg {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center;
+        filter: brightness(0.38) saturate(0.85);
+        transition: transform .5s ease;
+        z-index: 0;
+        will-change: transform;
+    }
+    .menu-cat-card:hover .cat-bg { transform: scale(1.07); }
+    /* Red left border on hover */
+    .menu-cat-card::before {
+        content: ''; position: absolute;
+        left: 0; top: 0; bottom: 0; width: 2px;
+        background: var(--red); transform: scaleY(0);
+        transition: transform .35s; transform-origin: bottom;
+        z-index: 3;
+    }
+    /* Permanent dark gradient overlay — static, no transition (avoids gradient repaint) */
+    .menu-cat-card::after {
+        content: ''; position: absolute; inset: 0;
+        background:
+            linear-gradient(to top, rgba(10,3,1,.9) 0%, rgba(10,3,1,.5) 55%, rgba(10,3,1,.15) 100%),
+            radial-gradient(ellipse at 0% 100%, rgba(228,30,43,.25), transparent 55%);
+        z-index: 1;
+    }
+    .menu-cat-card:hover { transform: translateY(-4px); }
+    .menu-cat-card:hover::before { transform: scaleY(1); }
+    /* Text above overlay */
+    .cat-num {
+        font-family: 'Big Shoulders Display', sans-serif;
+        font-weight: 900; font-size: 11px;
+        color: rgba(228,30,43,.7); letter-spacing: .2em;
+        display: block; margin-bottom: 10px;
+        position: relative; z-index: 2;
+    }
+    .cat-title {
+        font-family: 'Big Shoulders Display', sans-serif;
+        font-weight: 900; font-size: 28px;
+        text-transform: uppercase; color: var(--white);
+        line-height: 1.0; letter-spacing: 0.01em; margin-bottom: 0;
+        position: relative; z-index: 2;
+    }
+    @media (max-width: 900px) {
+        .menu-category-grid { grid-template-columns: repeat(2, 1fr); }
+        .menu-cat-card { min-height: 180px; }
+    }
+    @media (max-width: 480px) {
+        .menu-category-grid { grid-template-columns: 1fr; }
+        .menu-cat-card { min-height: 160px; }
+    }
     </style>
 </head>
 <body>
@@ -117,13 +192,12 @@
         <a href="menu.html" class="nav-pill" data-i18n="nav-menu">Menu</a>
     </div>
     <a href="index.html" class="nav-center">
-        <img src="/logo/dian-huo-logo.jpg" alt="Dian Huo Hotpot">
+        <img src="/logo/dian-huo-logo.png" alt="Dian Huo Hotpot">
         <div class="nav-brand">點火心窩 <span>Dian Huo Hotpot</span></div>
     </a>
     <div class="nav-right">
         <a href="gallery.html" class="nav-pill outline" data-i18n="nav-gallery">Gallery</a>
         <a href="experience.html" class="nav-pill outline" data-i18n="nav-experience">Experience</a>
-        <a href="reserve.html" class="nav-pill outline" data-i18n="nav-reserve">Reserve</a>
         <button class="lang-toggle" id="langToggle">中文</button>
     </div>
 </nav>
@@ -143,59 +217,95 @@
 <section id="menu">
     <div class="container">
 
-        <!-- Broths -->
-        <div class="menu-cat">
-            <div class="menu-cat-hd">
-                <div>
-                    <p class="label reveal" data-i18n="broth-label">The Foundation</p>
-                    <h2 class="menu-cat-title reveal d1" data-i18n="broth-h2">SIGNATURE<br><em>BROTHS</em></h2>
-                </div>
-                <p class="menu-cat-sub reveal d2" data-i18n="broth-sub">Every great hotpot begins with the broth. Choose your base — the soul of your evening.</p>
+        <div style="text-align:center; margin-bottom:56px;" class="reveal">
+            <p class="label" style="justify-content:center;" data-i18n="menu-cat-eyebrow">Our Categories</p>
+            <h2 class="menu-cat-title" style="font-size:clamp(38px,5.5vw,64px); margin-bottom:14px;" data-i18n="menu-cat-title">BROWSE <em>THE MENU</em></h2>
+            <p class="menu-cat-sub" style="margin:0 auto; text-align:center; max-width:440px;" data-i18n="menu-cat-desc">From handcrafted soups to premium meats — explore everything Dian Huo has to offer.</p>
+        </div>
+
+        <div class="menu-category-grid">
+
+            <div class="menu-cat-card reveal">
+                <img class="cat-bg" src="/Image/menu/optimized/homemade-soup.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">01</span>
+                <h3 class="cat-title" data-i18n="menu-cat-01">HOMEMADE<br>SOUP</h3>
             </div>
-            <div class="menu-cat-banner reveal">
-                <img src="Image/coconut.herbal.soup.png" alt="Signature Broths" loading="lazy">
+
+            <div class="menu-cat-card reveal d1">
+                <img class="cat-bg" src="/Image/menu/optimized/dianhuo-signature.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">02</span>
+                <h3 class="cat-title" data-i18n="menu-cat-02">DIANHUO<br>SIGNATURE</h3>
             </div>
-            <div class="menu-grid" id="brothGrid"></div>
+
+            <div class="menu-cat-card reveal d2">
+                <img class="cat-bg" src="/Image/menu/optimized/premium-meat.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">03</span>
+                <h3 class="cat-title" data-i18n="menu-cat-03">PREMIUM<br>MEAT</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d3">
+                <img class="cat-bg" src="/Image/menu/optimized/seafood.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">04</span>
+                <h3 class="cat-title" data-i18n="menu-cat-04">SEAFOOD</h3>
+            </div>
+
+            <div class="menu-cat-card reveal">
+                <img class="cat-bg" src="/Image/menu/optimized/hotpot-addon.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">05</span>
+                <h3 class="cat-title" data-i18n="menu-cat-05">HOTPOT<br>ADD-ON</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d1">
+                <img class="cat-bg" src="/Image/menu/optimized/beancurd.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">06</span>
+                <h3 class="cat-title" data-i18n="menu-cat-06">BEANCURD</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d2">
+                <img class="cat-bg" src="/Image/menu/optimized/vegetable.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">07</span>
+                <h3 class="cat-title" data-i18n="menu-cat-07">VEGETABLE</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d3">
+                <img class="cat-bg" src="/Image/menu/optimized/mushroom.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">08</span>
+                <h3 class="cat-title" data-i18n="menu-cat-08">MUSHROOM</h3>
+            </div>
+
+            <div class="menu-cat-card reveal">
+                <img class="cat-bg" src="/Image/menu/optimized/egg.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">09</span>
+                <h3 class="cat-title" data-i18n="menu-cat-09">EGG</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d1">
+                <img class="cat-bg" src="/Image/menu/optimized/dessert.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">10</span>
+                <h3 class="cat-title" data-i18n="menu-cat-10">DESSERT</h3>
+            </div>
+
+            <div class="menu-cat-card reveal d2">
+                <img class="cat-bg" src="/Image/menu/optimized/drinks.jpg" alt="" loading="lazy" decoding="async">
+                <span class="cat-num">11</span>
+                <h3 class="cat-title" data-i18n="menu-cat-11">DRINKS</h3>
+            </div>
+
         </div>
 
         <div class="ornament-line reveal"><span>火</span></div>
 
-        <!-- Proteins -->
-        <div class="menu-cat">
-            <div class="menu-cat-hd">
-                <div>
-                    <p class="label reveal" data-i18n="proteins-label">Premium Cuts</p>
-                    <h2 class="menu-cat-title reveal d1" data-i18n="proteins-h2">TASTE<br><em>THE BEST</em></h2>
-                </div>
-                <p class="menu-cat-sub reveal d2" data-i18n="proteins-sub">Sourced with care. Each cut deserves a moment before it meets the broth.</p>
-            </div>
-            <div class="menu-cat-banner reveal">
-                <img src="Image/dish.png" alt="Premium Cuts" loading="lazy">
-            </div>
-            <div class="menu-grid" id="proteinGrid"></div>
-        </div>
-
-        <div class="ornament-line reveal"><span>心</span></div>
-
-        <!-- House specials -->
-        <div class="menu-cat">
-            <div class="menu-cat-hd">
-                <div>
-                    <p class="label reveal" data-i18n="specials-label">Handcrafted Daily</p>
-                    <h2 class="menu-cat-title reveal d1" data-i18n="specials-h2">HOUSE<br><em>SPECIALS</em></h2>
-                </div>
-                <p class="menu-cat-sub reveal d2" data-i18n="specials-sub">Made fresh every morning. The small things that make the difference.</p>
-            </div>
-            <div class="menu-cat-banner reveal">
-                <img src="Image/handmade ball.png" alt="House Specials" loading="lazy">
-            </div>
-            <div class="menu-grid" id="specialGrid"></div>
+        <div style="text-align:center;" class="reveal d1">
+            <a href="public/menu/dianhuo-menu.pdf" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                <span data-i18n="menu-btn-pdf">View Full Menu PDF</span>
+            </a>
         </div>
 
         <div class="ornament-line reveal"><span>窩</span></div>
         <div style="text-align:center;" class="reveal d1">
-            <a href="reserve.html" class="btn-primary"><span data-i18n="menu-btn-reserve">Reserve Your Table</span></a>
+            <a href="reserve.html" class="btn-outline"><span data-i18n="menu-btn-reserve">Reserve Your Table</span></a>
         </div>
+
     </div>
 </section>
 
@@ -204,7 +314,7 @@
     <div class="container">
         <div class="footer-inner">
             <div class="footer-logo">
-                <img src="/logo/dian-huo-logo.jpg" alt="Dian Huo Hotpot">
+                <img src="/logo/dian-huo-logo.png" alt="Dian Huo Hotpot">
                 <div><div class="footer-brand">點火心窩 <span>Dian Huo Hotpot</span></div></div>
             </div>
             <div class="footer-info">
@@ -219,79 +329,6 @@
 
 <script src="js/lang.js" defer></script>
 <script src="js/main.js" defer></script>
-<script>
-(function() {
-    function spiceDots(level) {
-        var html = '';
-        for (var i = 0; i < 3; i++) {
-            html += '<span class="spice-dot ' + (i < level ? 'on' : 'off') + '"></span>';
-        }
-        return html;
-    }
-
-    function card(item, extra) {
-        return '<div class="menu-card ' + (extra || 'reveal') + '" data-hover>' +
-            '<p class="menu-card-tag en-only">' + (item.tag_en || '') + '</p>' +
-            '<p class="menu-card-tag zh-only">' + (item.tag_zh || '') + '</p>' +
-            '<h3 class="en-only">' + (item.name_en || '') + '</h3>' +
-            '<h3 class="zh-only">' + (item.name_zh || '') + '</h3>' +
-            '<p class="menu-card-zh zh-only">' + (item.name_zh || '') + '</p>' +
-            '<p class="en-only">' + (item.desc_en || '') + '</p>' +
-            '<p class="zh-only">' + (item.desc_zh || '') + '</p>' +
-            '<div class="menu-card-footer">' +
-                '<span class="menu-card-price">' + (item.price || '') + '</span>' +
-                '<div class="menu-card-heat">' + spiceDots(item.spice || 0) + '</div>' +
-            '</div>' +
-        '</div>';
-    }
-
-    function wideCard(item) {
-        return '<div class="menu-card wide reveal" data-hover>' +
-            '<div>' +
-                '<p class="menu-card-tag en-only">' + (item.tag_en || '') + '</p>' +
-                '<p class="menu-card-tag zh-only">' + (item.tag_zh || '') + '</p>' +
-                '<h3 class="en-only">' + (item.name_en || '') + '</h3>' +
-                '<h3 class="zh-only">' + (item.name_zh || '') + '</h3>' +
-                '<p class="menu-card-zh zh-only">' + (item.name_zh || '') + '</p>' +
-                '<p class="en-only">' + (item.desc_en || '') + '</p>' +
-                '<p class="zh-only">' + (item.desc_zh || '') + '</p>' +
-                '<div class="menu-card-footer"><span class="menu-card-price">' + (item.price || '') + '</span></div>' +
-            '</div>' +
-            (item.quote_en ? '<div class="wide-quote en-only">' + item.quote_en + '</div>' : '') +
-            (item.quote_zh ? '<div class="wide-quote zh-only">' + item.quote_zh + '</div>' : '') +
-        '</div>';
-    }
-
-    Promise.all([
-        fetch('/content/broths.json').then(function(r) { return r.json(); }),
-        fetch('/content/proteins.json').then(function(r) { return r.json(); }),
-        fetch('/content/specials.json').then(function(r) { return r.json(); })
-    ]).then(function(results) {
-        var broths = results[0].items || [];
-        var proteins = results[1].items || [];
-        var specials = results[2].items || [];
-
-        var bGrid = document.getElementById('brothGrid');
-        if (bGrid) bGrid.innerHTML = broths.map(function(item, i) {
-            return card(item, 'reveal' + (i > 0 ? ' d' + i : ''));
-        }).join('');
-
-        var pGrid = document.getElementById('proteinGrid');
-        if (pGrid) pGrid.innerHTML = proteins.map(function(item, i) {
-            if (item.wide) return wideCard(item);
-            var idx = i - 1;
-            return card(item, 'reveal' + (idx > 0 ? ' d' + idx : ''));
-        }).join('');
-
-        var sGrid = document.getElementById('specialGrid');
-        if (sGrid) sGrid.innerHTML = specials.map(function(item, i) {
-            return card(item, 'reveal' + (i > 0 ? ' d' + i : ''));
-        }).join('');
-    }).catch(function(err) {
-        console.warn('Menu failed to load:', err);
-    });
-})();
-</script>
 
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/60178787652" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">

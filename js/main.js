@@ -1,27 +1,34 @@
-// Custom cursor
+// Custom cursor — skip on touch/mobile (no pointer hardware)
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
+const hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-});
-(function trackRing() {
-    rx += (mx - rx) * .12; ry += (my - ry) * .12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(trackRing);
-})();
-document.querySelectorAll('a, button, [data-hover]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cur.style.width  = '14px'; cur.style.height = '14px';
-        ring.style.width = '48px'; ring.style.height = '48px';
+if (hasMouse) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cur.style.left = mx + 'px'; cur.style.top = my + 'px';
     });
-    el.addEventListener('mouseleave', () => {
-        cur.style.width  = '8px';  cur.style.height = '8px';
-        ring.style.width = '30px'; ring.style.height = '30px';
+    (function trackRing() {
+        rx += (mx - rx) * .12; ry += (my - ry) * .12;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(trackRing);
+    })();
+    document.querySelectorAll('a, button, [data-hover]').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cur.style.width  = '14px'; cur.style.height = '14px';
+            ring.style.width = '48px'; ring.style.height = '48px';
+        });
+        el.addEventListener('mouseleave', () => {
+            cur.style.width  = '8px';  cur.style.height = '8px';
+            ring.style.width = '30px'; ring.style.height = '30px';
+        });
     });
-});
+} else {
+    // Hide cursor elements on touch devices
+    if (cur)  cur.style.display  = 'none';
+    if (ring) ring.style.display = 'none';
+}
 
 // Navbar scroll
 const navbar = document.getElementById('navbar');

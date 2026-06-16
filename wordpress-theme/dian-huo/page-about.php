@@ -66,7 +66,7 @@ get_header(); ?>
                 <p class="reveal d3" data-i18n="about-p2">Every broth simmers for twelve hours. Every ingredient is sourced that morning. Every seat looks out at the city you call home — because some meals deserve more than four walls.</p>
                 <div class="about-stats reveal d4">
                     <div><div class="stat-num">3</div><div class="stat-lbl" data-i18n="stat-rooftop">Rooftop Level</div></div>
-                    <div><div class="stat-num">6</div><div class="stat-lbl" data-i18n="stat-broths">Signature Broths</div></div>
+                    <div><div class="stat-num">10</div><div class="stat-lbl" data-i18n="stat-broths">Homemade Broths</div></div>
                     <div><div class="stat-num">40+</div><div class="stat-lbl" data-i18n="stat-ingredients">Fresh Ingredients</div></div>
                 </div>
             </div>

@@ -164,8 +164,8 @@ nav.scrolled {
 .label::before { content: ''; width: 32px; height: 1px; background: var(--red); opacity: .7; }
 
 /* ── Reveals ── */
-.reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s, transform .8s; }
-.reveal.vis { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s, transform .8s; will-change: opacity, transform; }
+.reveal.vis { opacity: 1; transform: translateY(0); will-change: auto; }
 .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
 .d3 { transition-delay: .32s; } .d4 { transition-delay: .46s; }
 
@@ -219,6 +219,12 @@ nav.scrolled {
     letter-spacing: .2em; color: rgba(247,238,233,0.38);
 }
 @keyframes glowPulse { 0%,100% { opacity:.7; } 50% { opacity:1.1; } }
+
+/* ── Reduced motion (system preference) ── */
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none !important; }
+    .page-hdr-glow { animation: none !important; }
+}
 
 /* ── Footer ── */
 footer {

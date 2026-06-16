@@ -208,12 +208,12 @@ if (empty($gallery_imgs)) {
                 <span class="about-stat-label" data-i18n="idx-stat-floors">Floors Up</span>
             </div>
             <div class="about-stat">
-                <span class="about-stat-num">8+</span>
-                <span class="about-stat-label" data-i18n="idx-stat-broths">Signature Broths</span>
+                <span class="about-stat-num">10</span>
+                <span class="about-stat-label" data-i18n="idx-stat-broths">Homemade Broths</span>
             </div>
             <div class="about-stat">
                 <span class="about-stat-num">∞</span>
-                <span class="about-stat-label" data-i18n="idx-stat-nights">Good Nights</span>
+                <span class="about-stat-label" data-i18n="idx-stat-nights">Fresh Ingredients</span>
             </div>
         </div>
         <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn-outline sr sr-d4" data-i18n="idx-about-btn">Read Our Story</a>
