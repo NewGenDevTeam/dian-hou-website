@@ -722,5 +722,26 @@ document.querySelectorAll('.sr').forEach(el => observer.observe(el));
 .whatsapp-float:hover{background:#1ebe5d;transform:scale(1.08);box-shadow:0 6px 22px rgba(37,211,102,.6)}
 @media(max-width:600px){.whatsapp-float{bottom:18px;right:18px;width:54px;height:54px}.whatsapp-float svg{width:26px;height:26px}}
 </style>
+<script>
+(function() {
+    fetch('/api/gallery?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        })
+        .then(function(data) {
+            var images = data.images || [];
+            console.log('[home-gallery] source: ' + (data.source || 'fallback') + ' | using first 5 of ' + images.length);
+            var cells = document.querySelectorAll('#gallery-teaser .gallery-grid .g-cell');
+            cells.forEach(function(cell, i) {
+                if (!images[i]) return;
+                cell.innerHTML = '<img src="' + images[i].src + '" alt="' + (images[i].alt || 'Dian Huo Hotpot') + '" loading="lazy" decoding="async">';
+            });
+        })
+        .catch(function(err) {
+            console.warn('[home-gallery] fetch failed, keeping hardcoded images:', err.message);
+        });
+})();
+</script>
 </body>
 </html>
