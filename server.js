@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const http = require('http');
@@ -11,8 +12,8 @@ const WP_URL = (process.env.WP_URL || 'http://localhost').replace(/\/$/, '');
 
 // Proxy: fetch gallery from WordPress REST API, fall back to static JSON
 app.get('/api/gallery', (req, res) => {
-    // orderby=menu_order is NOT allowed in WP REST API by default — removed to avoid 400 error
-    const apiUrl = `${WP_URL}/wp-json/wp/v2/dh_gallery?per_page=100&_embed=1`;
+    // menu_order is whitelisted via a mu-plugin, so ordering by menu_order is enabled
+    const apiUrl = `${WP_URL}/wp-json/wp/v2/dh_gallery?per_page=100&_embed=1&orderby=menu_order&order=asc`;
     const client = apiUrl.startsWith('https') ? https : http;
 
     console.log(`[gallery] Fetching: ${apiUrl}`);
